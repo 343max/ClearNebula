@@ -1,0 +1,5 @@
+ib:
+    inputs: ClearNebula
+    outputs:
+        - templateName: scenes-swift4
+          output: ClearNebula/Generated/Storyboards.swift

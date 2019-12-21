@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="15702" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="uIp-in-Jos">
+    <device id="appleTV" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Login View Controller-->
+        <scene sceneID="78s-mH-dc2">
+            <objects>
+                <viewController id="uIp-in-Jos" customClass="LoginViewController" customModule="ClearNebula" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="iDo-uM-8Xm"/>
+                        <viewControllerLayoutGuide type="bottom" id="JLJ-dQ-5NL"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="XBJ-xR-pfP">
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="iHm-hZ-bpH">
+                                <rect key="frame" x="740" y="362.5" width="440" height="355"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="★" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="orI-1P-pFi">
+                                        <rect key="frame" x="0.0" y="0.0" width="440" height="75"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="64"/>
+                                        <color key="textColor" white="0.0" alpha="0.15732758620000001" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0PX-hC-IVa">
+                                        <rect key="frame" x="0.0" y="105" width="440" height="46"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="440" id="eeM-kc-y13"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="emailAddress" textContentType="email"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JR5-OK-Kfd">
+                                        <rect key="frame" x="0.0" y="181" width="440" height="58"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                        <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UoT-Ww-d3I">
+                                        <rect key="frame" x="0.0" y="269" width="440" height="86"/>
+                                        <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                                        <state key="normal" title="Login"/>
+                                        <connections>
+                                            <action selector="loginTapped" destination="uIp-in-Jos" eventType="primaryActionTriggered" id="m4o-MD-z9h"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="iHm-hZ-bpH" firstAttribute="centerX" secondItem="XBJ-xR-pfP" secondAttribute="centerX" id="76Y-78-7Va"/>
+                            <constraint firstItem="iHm-hZ-bpH" firstAttribute="centerY" secondItem="XBJ-xR-pfP" secondAttribute="centerY" id="LOv-Jy-n3m"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Was-Y1-ger"/>
+                    </view>
+                    <connections>
+                        <outlet property="emailField" destination="0PX-hC-IVa" id="zj2-ZP-1q3"/>
+                        <outlet property="passwordField" destination="JR5-OK-Kfd" id="wff-fy-8MR"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="s7A-Bv-8VY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="101" y="-147"/>
+        </scene>
+    </scenes>
+</document>

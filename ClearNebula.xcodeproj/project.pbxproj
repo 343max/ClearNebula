@@ -3,26 +3,35 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2E0D9C4623AEC82800886F5B /* Nebula in Frameworks */ = {isa = PBXBuildFile; productRef = 2E0D9C4523AEC82800886F5B /* Nebula */; };
+		2E0D9C4823AEC8BD00886F5B /* Cancellable+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0D9C4723AEC8BD00886F5B /* Cancellable+Helper.swift */; };
+		2E0D9C4B23AECD0600886F5B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0D9C4A23AECD0600886F5B /* LoginViewController.swift */; };
+		2E0D9C4D23AECD2200886F5B /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E0D9C4C23AECD2200886F5B /* Login.storyboard */; };
+		2E0D9C5023AED0E300886F5B /* Storyboards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0D9C4F23AED0E300886F5B /* Storyboards.swift */; };
 		2ED9F91E23AEC003000D153B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED9F91D23AEC003000D153B /* AppDelegate.swift */; };
 		2ED9F92023AEC003000D153B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED9F91F23AEC003000D153B /* ViewController.swift */; };
-		2ED9F92323AEC003000D153B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2ED9F92123AEC003000D153B /* Main.storyboard */; };
 		2ED9F92523AEC005000D153B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2ED9F92423AEC005000D153B /* Assets.xcassets */; };
 		2ED9F92823AEC005000D153B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2ED9F92623AEC005000D153B /* LaunchScreen.storyboard */; };
+		2ED9F93323AEC796000D153B /* NebulaClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED9F93223AEC796000D153B /* NebulaClient.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2E0D9C4723AEC8BD00886F5B /* Cancellable+Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Cancellable+Helper.swift"; sourceTree = "<group>"; };
+		2E0D9C4A23AECD0600886F5B /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		2E0D9C4C23AECD2200886F5B /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
+		2E0D9C4F23AED0E300886F5B /* Storyboards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storyboards.swift; sourceTree = "<group>"; };
 		2ED9F91A23AEC003000D153B /* ClearNebula.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ClearNebula.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2ED9F91D23AEC003000D153B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2ED9F91F23AEC003000D153B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		2ED9F92223AEC003000D153B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2ED9F92423AEC005000D153B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2ED9F92723AEC005000D153B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2ED9F92923AEC005000D153B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2ED9F93123AEC048000D153B /* Nebula */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Nebula; sourceTree = "<group>"; };
+		2ED9F93223AEC796000D153B /* NebulaClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NebulaClient.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -30,18 +39,44 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2E0D9C4623AEC82800886F5B /* Nebula in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2E0D9C4423AEC82800886F5B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		2E0D9C4923AECCFA00886F5B /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				2E0D9C4A23AECD0600886F5B /* LoginViewController.swift */,
+				2E0D9C4C23AECD2200886F5B /* Login.storyboard */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		2E0D9C4E23AED0CD00886F5B /* Generated */ = {
+			isa = PBXGroup;
+			children = (
+				2E0D9C4F23AED0E300886F5B /* Storyboards.swift */,
+			);
+			path = Generated;
+			sourceTree = "<group>";
+		};
 		2ED9F91123AEC003000D153B = {
 			isa = PBXGroup;
 			children = (
 				2ED9F93123AEC048000D153B /* Nebula */,
 				2ED9F91C23AEC003000D153B /* ClearNebula */,
 				2ED9F91B23AEC003000D153B /* Products */,
+				2E0D9C4423AEC82800886F5B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,12 +91,15 @@
 		2ED9F91C23AEC003000D153B /* ClearNebula */ = {
 			isa = PBXGroup;
 			children = (
+				2E0D9C4E23AED0CD00886F5B /* Generated */,
+				2E0D9C4923AECCFA00886F5B /* Login */,
 				2ED9F91D23AEC003000D153B /* AppDelegate.swift */,
 				2ED9F91F23AEC003000D153B /* ViewController.swift */,
-				2ED9F92123AEC003000D153B /* Main.storyboard */,
 				2ED9F92423AEC005000D153B /* Assets.xcassets */,
 				2ED9F92623AEC005000D153B /* LaunchScreen.storyboard */,
 				2ED9F92923AEC005000D153B /* Info.plist */,
+				2ED9F93223AEC796000D153B /* NebulaClient.swift */,
+				2E0D9C4723AEC8BD00886F5B /* Cancellable+Helper.swift */,
 			);
 			path = ClearNebula;
 			sourceTree = "<group>";
@@ -82,6 +120,9 @@
 			dependencies = (
 			);
 			name = ClearNebula;
+			packageProductDependencies = (
+				2E0D9C4523AEC82800886F5B /* Nebula */,
+			);
 			productName = ClearNebula;
 			productReference = 2ED9F91A23AEC003000D153B /* ClearNebula.app */;
 			productType = "com.apple.product-type.application";
@@ -124,9 +165,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2E0D9C4D23AECD2200886F5B /* Login.storyboard in Resources */,
 				2ED9F92823AEC005000D153B /* LaunchScreen.storyboard in Resources */,
 				2ED9F92523AEC005000D153B /* Assets.xcassets in Resources */,
-				2ED9F92323AEC003000D153B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,7 +178,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2E0D9C5023AED0E300886F5B /* Storyboards.swift in Sources */,
+				2E0D9C4823AEC8BD00886F5B /* Cancellable+Helper.swift in Sources */,
+				2ED9F93323AEC796000D153B /* NebulaClient.swift in Sources */,
 				2ED9F92023AEC003000D153B /* ViewController.swift in Sources */,
+				2E0D9C4B23AECD0600886F5B /* LoginViewController.swift in Sources */,
 				2ED9F91E23AEC003000D153B /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -145,14 +190,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		2ED9F92123AEC003000D153B /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2ED9F92223AEC003000D153B /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		2ED9F92623AEC005000D153B /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -336,6 +373,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		2E0D9C4523AEC82800886F5B /* Nebula */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Nebula;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 2ED9F91223AEC003000D153B /* Project object */;
 }
