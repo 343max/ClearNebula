@@ -58,9 +58,9 @@ extension NebulaNetworkClient {
                 case 200...299:
                     return data
                 default:
-                    if let errorResponse = try? JSONDecoder().decode(ErrorResponse.self, from: data) {
+                    if let errorResponse = try? Nebula.jsonDecoder.decode(ErrorResponse.self, from: data) {
                         throw NebulaError.serverError(detail: errorResponse.detail)
-                    } else if let fieldStringErrors = try? JSONDecoder().decode([String: [String]].self, from: data) {
+                    } else if let fieldStringErrors = try? Nebula.jsonDecoder.decode([String: [String]].self, from: data) {
                         let fieldErrors = fieldStringErrors.reduce(Dictionary<NebulaError.Field, [String]>()) {
                             (dict, tuple) in
                             var dict = dict
@@ -73,7 +73,7 @@ extension NebulaNetworkClient {
                     }
                 }
             })
-            .decode(type: type, decoder: JSONDecoder())
+            .decode(type: type, decoder: Nebula.jsonDecoder)
             .eraseToAnyPublisher()
     }
     
@@ -91,6 +91,13 @@ public struct Nebula {
     public init(client: NebulaNetworkClient) {
         self.client = client
     }
+    
+    static let jsonDecoder: JSONDecoder = {
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .secondsSince1970
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        return decoder
+    }()
 }
 
 extension Nebula {
