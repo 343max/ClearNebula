@@ -57,7 +57,9 @@ public struct Nebula {
 
 extension Nebula {
     public func login(email: String, password: String) -> JsonTaskPublisher<String> {
-//        HTTPCookieStorage.shared.cookies(for: URL(string: Nebula.enpoint)!)?.forEach(HTTPCookieStorage.shared.deleteCookie(_:))
+        HTTPCookieStorage.shared.cookies(for: URL(string: Nebula.enpoint)!)?.forEach({ (cookie) in
+            HTTPCookieStorage.shared.deleteCookie(cookie)
+        })
         
         var request = URLRequest(url: URL(string: Nebula.enpoint + "auth/login/")!)
         request.httpMethod = "POST"
