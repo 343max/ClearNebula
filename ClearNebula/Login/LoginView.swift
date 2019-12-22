@@ -12,31 +12,38 @@ struct LoginView: View {
         email.count > 3 && password.count > 3
     }
     
-    func errorView(error: Error?) -> AnyView {
+    func errorView(error: Error?, for field: NebulaError.Field) -> AnyView {
         guard let error = error else {
             return AnyView(EmptyView())
         }
         
-        var text: String
-        
-        switch error {
-        case is URLError:
-            text = error.localizedDescription
-        case NebulaError.unknownServerError:
-            text = "Nebula server returned some garbish"
-        case NebulaError.serverError(let detail):
-            text = detail
-        default:
-            text = error.localizedDescription
-        }
-        
-        return AnyView(
-            Text(text)
+        return AnyView(Group {
+            ForEach(errors(error: error, for: field), id: \.self) { (text) in
+                Text(text)
+                .fixedSize(horizontal: false, vertical: true)
                 .foregroundColor(.black)
                 .padding()
-                .background(Color(.systemOrange))
-                .cornerRadius(12)
-        )
+                    .background(Color(.systemOrange).opacity(0.3))
+                .cornerRadius(8)
+            }
+        })
+    }
+    
+    func errors(error: Error, for field: NebulaError.Field) -> [String] {
+        let errors: [NebulaError.Field: [String]]
+        
+        switch error {
+        case NebulaError.unknownServerError:
+            errors = [.nonField: ["Nebula server returned some giberish"]]
+        case NebulaError.serverError(let detail):
+            errors = [.nonField: [detail]]
+        case NebulaError.fieldErrors(let fieldErrors):
+            errors = fieldErrors
+        default:
+            errors = [.nonField: [error.localizedDescription]]
+        }
+        
+        return errors[field] ?? []
     }
     
     var body: some View {
@@ -44,16 +51,29 @@ struct LoginView: View {
             Text("★")
                 .font(.largeTitle)
                 .opacity(0.3)
-            TextField("Email", text: $email)
-                .textContentType(.emailAddress)
-                .keyboardType(.emailAddress)
-            SecureField("Password", text: $password)
-                .textContentType(.password)
-            errorView(error: viewModel.error)
-            Button("Login") {
-                self.viewModel.login(email: self.email, password: self.password)
+            VStack {
+                TextField("Email", text: $email)
+                    .textContentType(.emailAddress)
+                    .keyboardType(.emailAddress)
+                errorView(error: viewModel.error, for: .field("email"))
             }
-                .disabled(!loginEnabled)
+            VStack {
+                SecureField("Password", text: $password)
+                    .textContentType(.password)
+                errorView(error: viewModel.error, for: .field("password"))
+            }
+            errorView(error: viewModel.error, for: .nonField)
+
+            Button(action: {
+                self.viewModel.login(email: self.email, password: self.password)
+            }) {
+                HStack {
+                    SpinnerView(style: .medium).hidden(!viewModel.isLoading)
+                    Text("Login")
+                    SpinnerView(style: .medium).hidden()
+                }
+            }
+                .disabled(!loginEnabled || viewModel.isLoading)
         }
             .frame(width: 500, alignment: .center)
     }
@@ -63,10 +83,12 @@ extension LoginView {
     class ViewModel: ObservableObject {
         @Published var loggedIn = false
         @Published var error: Error? = nil
+        @Published var isLoading = false
         
         private var cancellables: [Cancellable] = []
         
         func login(email: String, password: String) {
+            isLoading = true
             Nebula(client: NebulaClient())
                 .login(email: email, password: password)
                 .map { (_) in (true, nil) }
@@ -77,6 +99,7 @@ extension LoginView {
                 .sink(receiveValue: { (loggedIn, error) in
                     self.loggedIn = loggedIn
                     self.error = error
+                    self.isLoading = false
                 })
                 .cancelled(by: &cancellables)
         }

@@ -11,6 +11,9 @@
 		2E0D9C4823AEC8BD00886F5B /* Cancellable+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0D9C4723AEC8BD00886F5B /* Cancellable+Helper.swift */; };
 		2E0D9C5023AED0E300886F5B /* Storyboards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0D9C4F23AED0E300886F5B /* Storyboards.swift */; };
 		2E0D9C5323AF8A9200886F5B /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0D9C5223AF8A9200886F5B /* LoginView.swift */; };
+		2E259A4223AFF968002E80A1 /* HiddenModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E259A4123AFF968002E80A1 /* HiddenModifier.swift */; };
+		2E68775D23AFF3640077C911 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E68775C23AFF3640077C911 /* Keychain.swift */; };
+		2E68776123AFF7DC0077C911 /* SpinnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E68776023AFF7DC0077C911 /* SpinnerView.swift */; };
 		2ED9F91E23AEC003000D153B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED9F91D23AEC003000D153B /* AppDelegate.swift */; };
 		2ED9F92023AEC003000D153B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED9F91F23AEC003000D153B /* ViewController.swift */; };
 		2ED9F92523AEC005000D153B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2ED9F92423AEC005000D153B /* Assets.xcassets */; };
@@ -22,6 +25,9 @@
 		2E0D9C4723AEC8BD00886F5B /* Cancellable+Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Cancellable+Helper.swift"; sourceTree = "<group>"; };
 		2E0D9C4F23AED0E300886F5B /* Storyboards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storyboards.swift; sourceTree = "<group>"; };
 		2E0D9C5223AF8A9200886F5B /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		2E259A4123AFF968002E80A1 /* HiddenModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiddenModifier.swift; sourceTree = "<group>"; };
+		2E68775C23AFF3640077C911 /* Keychain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
+		2E68776023AFF7DC0077C911 /* SpinnerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpinnerView.swift; sourceTree = "<group>"; };
 		2ED9F91A23AEC003000D153B /* ClearNebula.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ClearNebula.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2ED9F91D23AEC003000D153B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2ED9F91F23AEC003000D153B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -88,15 +94,18 @@
 		2ED9F91C23AEC003000D153B /* ClearNebula */ = {
 			isa = PBXGroup;
 			children = (
-				2E0D9C4E23AED0CD00886F5B /* Generated */,
-				2E0D9C4923AECCFA00886F5B /* Login */,
 				2ED9F91D23AEC003000D153B /* AppDelegate.swift */,
-				2ED9F91F23AEC003000D153B /* ViewController.swift */,
 				2ED9F92423AEC005000D153B /* Assets.xcassets */,
-				2ED9F92623AEC005000D153B /* LaunchScreen.storyboard */,
-				2ED9F92923AEC005000D153B /* Info.plist */,
-				2ED9F93223AEC796000D153B /* NebulaClient.swift */,
 				2E0D9C4723AEC8BD00886F5B /* Cancellable+Helper.swift */,
+				2E0D9C4E23AED0CD00886F5B /* Generated */,
+				2ED9F92923AEC005000D153B /* Info.plist */,
+				2E68775C23AFF3640077C911 /* Keychain.swift */,
+				2ED9F92623AEC005000D153B /* LaunchScreen.storyboard */,
+				2E0D9C4923AECCFA00886F5B /* Login */,
+				2ED9F93223AEC796000D153B /* NebulaClient.swift */,
+				2E68776023AFF7DC0077C911 /* SpinnerView.swift */,
+				2ED9F91F23AEC003000D153B /* ViewController.swift */,
+				2E259A4123AFF968002E80A1 /* HiddenModifier.swift */,
 			);
 			path = ClearNebula;
 			sourceTree = "<group>";
@@ -197,11 +206,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				2E0D9C5023AED0E300886F5B /* Storyboards.swift in Sources */,
+				2E68776123AFF7DC0077C911 /* SpinnerView.swift in Sources */,
 				2E0D9C5323AF8A9200886F5B /* LoginView.swift in Sources */,
 				2E0D9C4823AEC8BD00886F5B /* Cancellable+Helper.swift in Sources */,
 				2ED9F93323AEC796000D153B /* NebulaClient.swift in Sources */,
 				2ED9F92023AEC003000D153B /* ViewController.swift in Sources */,
 				2ED9F91E23AEC003000D153B /* AppDelegate.swift in Sources */,
+				2E259A4223AFF968002E80A1 /* HiddenModifier.swift in Sources */,
+				2E68775D23AFF3640077C911 /* Keychain.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
