@@ -10,10 +10,39 @@ public protocol NebulaNetworkClient {
 public typealias JsonTaskPublisher<T> = AnyPublisher<T, Error>
 
 public enum NebulaError: Error {
+    public enum Field {
+        case nonField
+        case field(String)
+    }
+    
     case unknownServerError
     case serverError(detail: String)
-    case fieldErrors([String: [String]])
+    case fieldErrors([Field: [String]])
 }
+
+extension NebulaError.Field: RawRepresentable {
+    public init(rawValue: String) {
+        switch rawValue {
+        case "non_field_errors":
+            self = .nonField
+        default:
+            self = .field(rawValue)
+        }
+    }
+    
+    public var rawValue: String {
+        switch self {
+        case .nonField:
+            return "non_field_errors"
+        case .field(let field):
+            return field
+        }
+    }
+    
+    public typealias RawValue = String
+}
+
+extension NebulaError.Field: Hashable { }
 
 private struct ErrorResponse: Decodable {
     let detail: String
@@ -31,7 +60,13 @@ extension NebulaNetworkClient {
                 default:
                     if let errorResponse = try? JSONDecoder().decode(ErrorResponse.self, from: data) {
                         throw NebulaError.serverError(detail: errorResponse.detail)
-                    } else if let fieldErrors = try? JSONDecoder().decode([String: [String]].self, from: data) {
+                    } else if let fieldStringErrors = try? JSONDecoder().decode([String: [String]].self, from: data) {
+                        let fieldErrors = fieldStringErrors.reduce(Dictionary<NebulaError.Field, [String]>()) {
+                            (dict, tuple) in
+                            var dict = dict
+                            dict[NebulaError.Field(rawValue: tuple.key)] = tuple.value
+                            return dict
+                        }
                         throw NebulaError.fieldErrors(fieldErrors)
                     } else {
                         throw NebulaError.unknownServerError

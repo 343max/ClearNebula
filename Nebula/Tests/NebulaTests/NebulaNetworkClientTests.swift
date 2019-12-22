@@ -58,10 +58,9 @@ final class NebulaNetworkClientTests: XCTestCase {
         let client = MockClient(string: "{\"email\": [\"Enter a valid email address.\"]}", statusCode: 400)
         _ = client.get(path: "/break/something", type: SampleResponse.self)
             .sink(receiveCompletion: { (completion) in
-                switch completion {
-                case .failure(NebulaError.fieldErrors(["email": ["Enter a valid email address."]])):
-                    XCTAssertTrue(true)
-                default:
+                if case Subscribers.Completion.failure(NebulaError.fieldErrors(let errors)) = completion {
+                    XCTAssertEqual(errors, [.field("email"): ["Enter a valid email address."]])
+                } else {
                     XCTFail()
                 }
             }, receiveValue: { (response) in
@@ -74,10 +73,9 @@ final class NebulaNetworkClientTests: XCTestCase {
                             statusCode: 400)
         _ = client.get(path: "/break/something", type: SampleResponse.self)
             .sink(receiveCompletion: { (completion) in
-                switch completion {
-                case .failure(NebulaError.fieldErrors(["non_field_errors": ["Unable to log in with provided credentials."]])):
-                    XCTAssertTrue(true)
-                default:
+                if case Subscribers.Completion.failure(NebulaError.fieldErrors(let errors)) = completion {
+                    XCTAssertEqual(errors, [.nonField: ["Unable to log in with provided credentials."]])
+                } else {
                     XCTFail()
                 }
             }, receiveValue: { (response) in
