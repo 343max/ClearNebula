@@ -59,14 +59,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		2E0D9C4923AECCFA00886F5B /* Login */ = {
-			isa = PBXGroup;
-			children = (
-				2E0D9C5223AF8A9200886F5B /* LoginView.swift */,
-			);
-			path = Login;
-			sourceTree = "<group>";
-		};
 		2E0D9C4E23AED0CD00886F5B /* Generated */ = {
 			isa = PBXGroup;
 			children = (
@@ -99,16 +91,16 @@
 				2ED9F91D23AEC003000D153B /* AppDelegate.swift */,
 				2ED9F92423AEC005000D153B /* Assets.xcassets */,
 				2E0D9C4723AEC8BD00886F5B /* Cancellable+Helper.swift */,
+				2E259A4523B01C4B002E80A1 /* FeaturedView.swift */,
 				2E0D9C4E23AED0CD00886F5B /* Generated */,
 				2E259A4123AFF968002E80A1 /* HiddenModifier.swift */,
 				2ED9F92923AEC005000D153B /* Info.plist */,
 				2E68775C23AFF3640077C911 /* Keychain.swift */,
 				2E259A4323B00E7F002E80A1 /* Keychain+AccessToken.swift */,
 				2ED9F92623AEC005000D153B /* LaunchScreen.storyboard */,
-				2E0D9C4923AECCFA00886F5B /* Login */,
+				2E0D9C5223AF8A9200886F5B /* LoginView.swift */,
 				2ED9F93223AEC796000D153B /* NebulaClient.swift */,
 				2E68776023AFF7DC0077C911 /* SpinnerView.swift */,
-				2E259A4523B01C4B002E80A1 /* FeaturedView.swift */,
 			);
 			path = ClearNebula;
 			sourceTree = "<group>";
