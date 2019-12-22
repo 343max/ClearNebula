@@ -1,18 +1,47 @@
 import Combine
 import Foundation
 
+public typealias NebulaNetworkClientPublisher = AnyPublisher<(data: Data, response: URLResponse), URLError>
+
 public protocol NebulaNetworkClient {
-    func send(_ request: URLRequest) -> URLSession.DataTaskPublisher
+    func send(_ request: URLRequest) -> NebulaNetworkClientPublisher
 }
 
 public typealias JsonTaskPublisher<T> = AnyPublisher<T, Error>
 
+public enum NebulaError: Error {
+    case unknownServerError
+    case serverError(detail: String)
+}
+
+private struct ErrorResponse: Decodable {
+    let detail: String
+}
+
 extension NebulaNetworkClient {
     func send<T>(_ request: URLRequest, type: T.Type) -> JsonTaskPublisher<T> where T: Decodable {
         return send(request)
-            .map { $0.data }
+            .tryMap({ (data, response) in
+                let response = response as! HTTPURLResponse
+                
+                switch response.statusCode {
+                case 200...299:
+                    return data
+                default:
+                    guard let errorResponse = try? JSONDecoder().decode(ErrorResponse.self, from: data) else {
+                        throw NebulaError.unknownServerError
+                    }
+                    
+                    throw NebulaError.serverError(detail: errorResponse.detail)
+                }
+            })
             .decode(type: type, decoder: JSONDecoder())
             .eraseToAnyPublisher()
+    }
+    
+    func get<T>(path: String, type: T.Type) -> JsonTaskPublisher<T> where T: Decodable {
+        let request = URLRequest(url: URL(string: Nebula.enpoint + path)!)
+        return send(request, type: type)
     }
 }
 
@@ -28,6 +57,8 @@ public struct Nebula {
 
 extension Nebula {
     public func login(email: String, password: String) -> JsonTaskPublisher<String> {
+//        HTTPCookieStorage.shared.cookies(for: URL(string: Nebula.enpoint)!)?.forEach(HTTPCookieStorage.shared.deleteCookie(_:))
+        
         var request = URLRequest(url: URL(string: Nebula.enpoint + "auth/login/")!)
         request.httpMethod = "POST"
         request.httpBody = try! JSONEncoder().encode(LoginRequestPayload(email: email, password: password))
