@@ -12,6 +12,7 @@ public typealias JsonTaskPublisher<T> = AnyPublisher<T, Error>
 public enum NebulaError: Error {
     case unknownServerError
     case serverError(detail: String)
+    case fieldErrors([String: [String]])
 }
 
 private struct ErrorResponse: Decodable {
@@ -28,11 +29,13 @@ extension NebulaNetworkClient {
                 case 200...299:
                     return data
                 default:
-                    guard let errorResponse = try? JSONDecoder().decode(ErrorResponse.self, from: data) else {
+                    if let errorResponse = try? JSONDecoder().decode(ErrorResponse.self, from: data) {
+                        throw NebulaError.serverError(detail: errorResponse.detail)
+                    } else if let fieldErrors = try? JSONDecoder().decode([String: [String]].self, from: data) {
+                        throw NebulaError.fieldErrors(fieldErrors)
+                    } else {
                         throw NebulaError.unknownServerError
                     }
-                    
-                    throw NebulaError.serverError(detail: errorResponse.detail)
                 }
             })
             .decode(type: type, decoder: JSONDecoder())

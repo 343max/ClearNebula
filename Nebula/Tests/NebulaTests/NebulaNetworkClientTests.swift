@@ -54,6 +54,37 @@ final class NebulaNetworkClientTests: XCTestCase {
             })
     }
     
+    func testFieldErrors() {
+        let client = MockClient(string: "{\"email\": [\"Enter a valid email address.\"]}", statusCode: 400)
+        _ = client.get(path: "/break/something", type: SampleResponse.self)
+            .sink(receiveCompletion: { (completion) in
+                switch completion {
+                case .failure(NebulaError.fieldErrors(["email": ["Enter a valid email address."]])):
+                    XCTAssertTrue(true)
+                default:
+                    XCTFail()
+                }
+            }, receiveValue: { (response) in
+                XCTFail()
+            })
+    }
+    
+    func testNonFieldErrors() {
+        let client = MockClient(string: "{\"non_field_errors\": [\"Unable to log in with provided credentials.\"]}",
+                            statusCode: 400)
+        _ = client.get(path: "/break/something", type: SampleResponse.self)
+            .sink(receiveCompletion: { (completion) in
+                switch completion {
+                case .failure(NebulaError.fieldErrors(["non_field_errors": ["Unable to log in with provided credentials."]])):
+                    XCTAssertTrue(true)
+                default:
+                    XCTFail()
+                }
+            }, receiveValue: { (response) in
+                XCTFail()
+            })
+    }
+    
     func testInvalidErrorResponse() {
         let client = MockClient(string: "this is not json", statusCode: 400)
         _ = client.get(path: "/break/something", type: SampleResponse.self)
