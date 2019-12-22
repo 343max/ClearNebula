@@ -9,9 +9,8 @@
 /* Begin PBXBuildFile section */
 		2E0D9C4623AEC82800886F5B /* Nebula in Frameworks */ = {isa = PBXBuildFile; productRef = 2E0D9C4523AEC82800886F5B /* Nebula */; };
 		2E0D9C4823AEC8BD00886F5B /* Cancellable+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0D9C4723AEC8BD00886F5B /* Cancellable+Helper.swift */; };
-		2E0D9C4B23AECD0600886F5B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0D9C4A23AECD0600886F5B /* LoginViewController.swift */; };
-		2E0D9C4D23AECD2200886F5B /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E0D9C4C23AECD2200886F5B /* Login.storyboard */; };
 		2E0D9C5023AED0E300886F5B /* Storyboards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0D9C4F23AED0E300886F5B /* Storyboards.swift */; };
+		2E0D9C5323AF8A9200886F5B /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0D9C5223AF8A9200886F5B /* LoginView.swift */; };
 		2ED9F91E23AEC003000D153B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED9F91D23AEC003000D153B /* AppDelegate.swift */; };
 		2ED9F92023AEC003000D153B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED9F91F23AEC003000D153B /* ViewController.swift */; };
 		2ED9F92523AEC005000D153B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2ED9F92423AEC005000D153B /* Assets.xcassets */; };
@@ -21,9 +20,8 @@
 
 /* Begin PBXFileReference section */
 		2E0D9C4723AEC8BD00886F5B /* Cancellable+Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Cancellable+Helper.swift"; sourceTree = "<group>"; };
-		2E0D9C4A23AECD0600886F5B /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		2E0D9C4C23AECD2200886F5B /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		2E0D9C4F23AED0E300886F5B /* Storyboards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storyboards.swift; sourceTree = "<group>"; };
+		2E0D9C5223AF8A9200886F5B /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		2ED9F91A23AEC003000D153B /* ClearNebula.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ClearNebula.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2ED9F91D23AEC003000D153B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2ED9F91F23AEC003000D153B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -56,8 +54,7 @@
 		2E0D9C4923AECCFA00886F5B /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				2E0D9C4A23AECD0600886F5B /* LoginViewController.swift */,
-				2E0D9C4C23AECD2200886F5B /* Login.storyboard */,
+				2E0D9C5223AF8A9200886F5B /* LoginView.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -111,6 +108,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2ED9F92C23AEC005000D153B /* Build configuration list for PBXNativeTarget "ClearNebula" */;
 			buildPhases = (
+				2E0D9C5123AF829000886F5B /* swiftlint */,
 				2ED9F91623AEC003000D153B /* Sources */,
 				2ED9F91723AEC003000D153B /* Frameworks */,
 				2ED9F91823AEC003000D153B /* Resources */,
@@ -165,7 +163,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2E0D9C4D23AECD2200886F5B /* Login.storyboard in Resources */,
 				2ED9F92823AEC005000D153B /* LaunchScreen.storyboard in Resources */,
 				2ED9F92523AEC005000D153B /* Assets.xcassets in Resources */,
 			);
@@ -173,16 +170,37 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		2E0D9C5123AF829000886F5B /* swiftlint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = swiftlint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "swiftgen\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		2ED9F91623AEC003000D153B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				2E0D9C5023AED0E300886F5B /* Storyboards.swift in Sources */,
+				2E0D9C5323AF8A9200886F5B /* LoginView.swift in Sources */,
 				2E0D9C4823AEC8BD00886F5B /* Cancellable+Helper.swift in Sources */,
 				2ED9F93323AEC796000D153B /* NebulaClient.swift in Sources */,
 				2ED9F92023AEC003000D153B /* ViewController.swift in Sources */,
-				2E0D9C4B23AECD0600886F5B /* LoginViewController.swift in Sources */,
 				2ED9F91E23AEC003000D153B /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
