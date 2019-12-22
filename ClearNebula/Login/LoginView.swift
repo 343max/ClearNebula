@@ -3,13 +3,12 @@ import Nebula
 import SwiftUI
 
 struct LoginView: View {
-    @State var email = ""
-    @State var password = ""
+    typealias LoginCallback = (_ accessToken: String) -> ()
     
-    @ObservedObject var viewModel = ViewModel()
+    @ObservedObject var viewModel: ViewModel
     
-    var loginEnabled: Bool {
-        email.count > 3 && password.count > 3
+    init(email: String = "", password: String = "", loginCallback: @escaping LoginCallback) {
+        self.viewModel = ViewModel(email: email, password: password, loginCallback: loginCallback)
     }
     
     func errorView(error: Error?, for field: NebulaError.Field) -> AnyView {
@@ -52,20 +51,20 @@ struct LoginView: View {
                 .font(.largeTitle)
                 .opacity(0.3)
             VStack {
-                TextField("Email", text: $email)
+                TextField("Email", text: $viewModel.email)
                     .textContentType(.emailAddress)
                     .keyboardType(.emailAddress)
                 errorView(error: viewModel.error, for: .field("email"))
             }
             VStack {
-                SecureField("Password", text: $password)
+                SecureField("Password", text: $viewModel.password)
                     .textContentType(.password)
                 errorView(error: viewModel.error, for: .field("password"))
             }
             errorView(error: viewModel.error, for: .nonField)
 
             Button(action: {
-                self.viewModel.login(email: self.email, password: self.password)
+                self.viewModel.login()
             }) {
                 HStack {
                     SpinnerView(style: .medium).hidden(!viewModel.isLoading)
@@ -73,7 +72,7 @@ struct LoginView: View {
                     SpinnerView(style: .medium).hidden()
                 }
             }
-                .disabled(!loginEnabled || viewModel.isLoading)
+            .disabled(!viewModel.loginEnabled || viewModel.isLoading)
         }
             .frame(width: 500, alignment: .center)
     }
@@ -85,21 +84,40 @@ extension LoginView {
         @Published var error: Error? = nil
         @Published var isLoading = false
         
+        @Published var email: String
+        @Published var password: String
+        
+        var loginEnabled: Bool {
+            email.count > 3 && password.count > 3
+        }
+        
+        let loginCallback: LoginCallback
+        
+        init(email: String, password: String, loginCallback: @escaping LoginCallback) {
+            self.email = email
+            self.password = password
+            self.loginCallback = loginCallback
+        }
+        
         private var cancellables: [Cancellable] = []
         
-        func login(email: String, password: String) {
+        func login() {
             isLoading = true
             Nebula(client: NebulaClient())
                 .login(email: email, password: password)
-                .map { (_) in (true, nil) }
+                .map { (key) in (key, nil) }
                 .catch { (error) in
-                    return Just((false, error))
+                    return Just((nil, error))
                 }
                 .receive(on: RunLoop.main)
-                .sink(receiveValue: { (loggedIn, error) in
-                    self.loggedIn = loggedIn
+                .sink(receiveValue: { (key, error) in
+                    self.loggedIn = key != nil
                     self.error = error
                     self.isLoading = false
+                    
+                    if let key = key {
+                        self.loginCallback(key)
+                    }
                 })
                 .cancelled(by: &cancellables)
         }
@@ -107,13 +125,13 @@ extension LoginView {
 }
 
 extension LoginView {
-    static func viewController() -> UIHostingController<LoginView> {
-        return UIHostingController(rootView: LoginView(email: "max@343max.de", password: "1234"))
+    static func viewController(loginCallback: @escaping LoginCallback) -> UIHostingController<LoginView> {
+        return UIHostingController(rootView: LoginView(loginCallback: loginCallback))
     }
 }
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView()
+        LoginView(loginCallback: { (_) in })
     }
 }
