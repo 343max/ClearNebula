@@ -102,8 +102,8 @@
 				2ED9F92623AEC005000D153B /* LaunchScreen.storyboard */,
 				2E0D9C5223AF8A9200886F5B /* LoginView.swift */,
 				2ED9F93223AEC796000D153B /* NebulaClient.swift */,
-				2E68776023AFF7DC0077C911 /* SpinnerView.swift */,
 				2EE1C8D423B0B6E7001B8759 /* NebulaController.swift */,
+				2E68776023AFF7DC0077C911 /* SpinnerView.swift */,
 			);
 			path = ClearNebula;
 			sourceTree = "<group>";
