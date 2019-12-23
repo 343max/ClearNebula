@@ -41,8 +41,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
             })
             .sink { [weak self] (accessToken) in
-                self?.navigationController.viewControllers = [FeaturedView.viewController(accessToken: accessToken)]
-                self?.loginViewController?.dismiss(animated: true, completion: nil)
+                guard let self = self else { return }
+                self.navigationController.viewControllers = [FeaturedView.viewController(nebulaController: self.nebulaController)]
+                self.loginViewController?.dismiss(animated: true, completion: nil)
             }
             .cancelled(by: &cancellables)
         
