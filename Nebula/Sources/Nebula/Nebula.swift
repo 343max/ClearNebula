@@ -86,7 +86,7 @@ extension NebulaNetworkClient {
 public struct Nebula {
     public static let enpoint = "https://api.watchnebula.com/api/v1/"
     
-    public let client: NebulaNetworkClient
+    internal let client: NebulaNetworkClient
     
     public init(client: NebulaNetworkClient) {
         self.client = client

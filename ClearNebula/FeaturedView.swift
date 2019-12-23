@@ -3,18 +3,19 @@ import Nebula
 import SwiftUI
 
 struct ZypeReadyView<Content>: View where Content: View {
-    private let state: Binding<NebulaController.State>
-    private let content: () -> Content
+    typealias ContentBuilder = (_ zype: Zype) -> Content
+    private let state: NebulaController.State
+    private let content: ContentBuilder
     
-    init(state: Binding<NebulaController.State>, @ViewBuilder content: @escaping () -> Content) {
+    init(state: NebulaController.State, @ViewBuilder content: @escaping ContentBuilder) {
         self.state = state
         self.content = content
     }
     
     var body: some View {
-        switch state.wrappedValue {
-        case .gotTokens(_, _):
-            return AnyView(content())
+        switch state {
+        case .gotTokens(_, let tokens):
+            return AnyView(content(Zype(client: NebulaClient(), tokens: tokens)))
         default:
             return AnyView(SpinnerView(style: .large))
         }
@@ -29,7 +30,7 @@ struct FeaturedView: View {
     }
     
     var body: some View {
-        ZypeReadyView(state: $viewModel.state) {
+        ZypeReadyView(state: viewModel.state) { (zype) in
             Text("Ready!")
         }
     }
