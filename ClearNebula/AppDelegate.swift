@@ -1,3 +1,4 @@
+import Combine
 import UIKit
 
 @UIApplicationMain
@@ -5,6 +6,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     var navigationController: UINavigationController!
+    var loginViewController: UIViewController?
+    
+    let nebulaController = NebulaController()
+    
+    var cancellables: [Cancellable] = []
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         let window = UIWindow(frame: UIScreen.main.bounds)
@@ -13,23 +19,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 
         window.rootViewController = navigationController
         window.makeKeyAndVisible()
-        
-        if let accessToken = try! Keychain.getNebulaAccessToken() {
-            navigationController.viewControllers = [FeaturedView.viewController(accessToken: accessToken)]
-        } else {
-            navigationController.present(LoginView.viewController(loginCallback: loggedIn(accessToken:)),
-                                       animated: false,
-                                       completion: nil)
-        }
 
         self.window = window
         
+        nebulaController.$state
+            .filter { if case .loggedOut = $0 { return true } else { return false } }
+            .sink { [weak self] (_) in
+                guard let self = self else { return }
+                let loginViewController = LoginView.viewController(nebulaController: self.nebulaController)
+                self.navigationController.present(loginViewController, animated: true, completion: nil)
+                self.loginViewController = loginViewController
+            }
+        .cancelled(by: &cancellables)
+        
+        nebulaController.$state
+            .compactMap({ (state: NebulaController.State) -> String? in
+                if case .loggedIn(let accessToken) = state {
+                    return accessToken
+                } else {
+                    return nil
+                }
+            })
+            .sink { [weak self] (accessToken) in
+                self?.navigationController.viewControllers = [FeaturedView.viewController(accessToken: accessToken)]
+                self?.loginViewController?.dismiss(animated: true, completion: nil)
+            }
+            .cancelled(by: &cancellables)
+        
         return true
-    }
-    
-    func loggedIn(accessToken: String) {
-        try! Keychain.set(nebulaAccessToken: accessToken)
-        navigationController.viewControllers = [FeaturedView.viewController(accessToken: accessToken)]
-        self.navigationController.dismiss(animated: true, completion: nil)
     }
 }

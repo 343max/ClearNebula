@@ -1,10 +1,34 @@
+import Nebula
 import SwiftUI
 
 struct FeaturedView: View {
-    let accessToken: String
+    @ObservedObject var viewModel: ViewModel
+    
+    init(accessToken: String) {
+        self.viewModel = ViewModel(accessToken: accessToken)
+    }
     
     var body: some View {
-        Text("Hello, World!: \(accessToken)")
+        Text("Hello, World!: \(viewModel.accessToken)")
+            .onAppear {
+                self.viewModel.load()
+            }
+    }
+}
+
+extension FeaturedView {
+    class ViewModel: ObservableObject {
+        let accessToken: String
+
+        @Published var zypeToken: ZypeTokens? = nil
+        
+        init(accessToken: String) {
+            self.accessToken = accessToken
+        }
+        
+        func load() {
+            debugPrint("hi!")
+        }
     }
 }
 

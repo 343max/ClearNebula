@@ -7,8 +7,8 @@ struct LoginView: View {
     
     @ObservedObject var viewModel: ViewModel
     
-    init(email: String = "", password: String = "", loginCallback: @escaping LoginCallback) {
-        self.viewModel = ViewModel(email: email, password: password, loginCallback: loginCallback)
+    init(email: String = "", password: String = "", nebulaController: NebulaController) {
+        self.viewModel = ViewModel(email: email, password: password, nebulaController: nebulaController)
     }
     
     func errorView(error: Error?, for field: NebulaError.Field) -> AnyView {
@@ -91,33 +91,28 @@ extension LoginView {
             email.count > 3 && password.count > 3
         }
         
-        let loginCallback: LoginCallback
+        let nebulaController: NebulaController
         
-        init(email: String, password: String, loginCallback: @escaping LoginCallback) {
+        init(email: String, password: String, nebulaController: NebulaController) {
             self.email = email
             self.password = password
-            self.loginCallback = loginCallback
+            self.nebulaController = nebulaController
         }
         
         private var cancellables: [Cancellable] = []
         
         func login() {
             isLoading = true
-            Nebula(client: NebulaClient())
-                .login(email: email, password: password)
+            nebulaController.logIn(email: email, password: password)
                 .map { (key) in (key, nil) }
                 .catch { (error) in
                     return Just((nil, error))
                 }
-                .receive(on: RunLoop.main)
-                .sink(receiveValue: { (key, error) in
+                .sink(receiveValue: { [weak self] (key, error) in
+                    guard let self = self else { return }
                     self.loggedIn = key != nil
                     self.error = error
                     self.isLoading = false
-                    
-                    if let key = key {
-                        self.loginCallback(key)
-                    }
                 })
                 .cancelled(by: &cancellables)
         }
@@ -125,13 +120,13 @@ extension LoginView {
 }
 
 extension LoginView {
-    static func viewController(loginCallback: @escaping LoginCallback) -> UIHostingController<LoginView> {
-        return UIHostingController(rootView: LoginView(loginCallback: loginCallback))
+    static func viewController(nebulaController: NebulaController) -> UIHostingController<LoginView> {
+        return UIHostingController(rootView: LoginView(nebulaController: nebulaController))
     }
 }
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView(loginCallback: { (_) in })
+        LoginView(nebulaController: NebulaController())
     }
 }

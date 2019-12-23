@@ -13,8 +13,7 @@ public struct ZypeTokens {
 extension ZypeTokens: Decodable { }
 
 extension Nebula {
-    
-    func zypeToken(accessToken: String) -> JsonTaskPublisher<ZypeTokens> {
+    public func zypeToken(accessToken: String) -> JsonTaskPublisher<ZypeTokens> {
         var request = URLRequest(url: URL(string: Nebula.enpoint + "auth/user/")!)
         request.addValue("Token \(accessToken)", forHTTPHeaderField: "Authorization")
         
