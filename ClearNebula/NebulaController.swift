@@ -6,7 +6,7 @@ final class NebulaController {
     enum State {
         case loggedOut
         case loggedIn(accessToken: String)
-        case gotTokens(accessToken: String, zypeTokens: ZypeTokens)
+        case gotTokens(accessToken: String, zypeTokens: Zype.Tokens)
     }
     
     @Published private(set) var state: State = .loggedOut

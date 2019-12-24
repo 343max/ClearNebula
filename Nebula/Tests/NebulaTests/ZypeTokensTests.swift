@@ -27,9 +27,10 @@ final class ZypeTokensTests: XCTestCase {
         }
         """.data(using: .utf8)!
         
-        let user = try! Nebula.jsonDecoder.decode(ZypeTokens.User.self, from: data)
-        let zypeToken = user.zypeAuthInfo
+        let user = try! Nebula.jsonDecoder.decode(Nebula.User.self, from: data)
+        let zypeToken = Zype.Tokens(user: user)
         
+        XCTAssertEqual(zypeToken.userId, "42")
         XCTAssertEqual(zypeToken.accessToken, "d96181026557f5d2ed2108de745c06b8fb1afbd5d96181026557f5d2ed2108de")
         XCTAssertEqual(zypeToken.expiresAt, Date(timeIntervalSince1970: 1577042980)) // 2019-12-22 19:29:40 +0000
         XCTAssertEqual(zypeToken.refreshToken, "ea2c6c9325495da024a17c69f3502772ee399859ea2c6c9325495da024a17c69")
