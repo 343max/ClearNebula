@@ -16,11 +16,14 @@
 		2E259A4623B01C4B002E80A1 /* FeaturedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E259A4523B01C4B002E80A1 /* FeaturedView.swift */; };
 		2E68775D23AFF3640077C911 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E68775C23AFF3640077C911 /* Keychain.swift */; };
 		2E68776123AFF7DC0077C911 /* SpinnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E68776023AFF7DC0077C911 /* SpinnerView.swift */; };
+		2E7D95CA23B235C90093B2DA /* WebImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7D95C923B235C90093B2DA /* WebImageView.swift */; };
+		2E7D95CD23B2362D0093B2DA /* URLImage in Frameworks */ = {isa = PBXBuildFile; productRef = 2E7D95CC23B2362D0093B2DA /* URLImage */; };
 		2ED9F91E23AEC003000D153B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED9F91D23AEC003000D153B /* AppDelegate.swift */; };
 		2ED9F92523AEC005000D153B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2ED9F92423AEC005000D153B /* Assets.xcassets */; };
 		2ED9F92823AEC005000D153B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2ED9F92623AEC005000D153B /* LaunchScreen.storyboard */; };
 		2ED9F93323AEC796000D153B /* NebulaClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED9F93223AEC796000D153B /* NebulaClient.swift */; };
 		2EE1C8D523B0B6E7001B8759 /* NebulaController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE1C8D423B0B6E7001B8759 /* NebulaController.swift */; };
+		2EE1C8D723B1344A001B8759 /* VideoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE1C8D623B1344A001B8759 /* VideoButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +35,7 @@
 		2E259A4523B01C4B002E80A1 /* FeaturedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedView.swift; sourceTree = "<group>"; };
 		2E68775C23AFF3640077C911 /* Keychain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
 		2E68776023AFF7DC0077C911 /* SpinnerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpinnerView.swift; sourceTree = "<group>"; };
+		2E7D95C923B235C90093B2DA /* WebImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebImageView.swift; sourceTree = "<group>"; };
 		2ED9F91A23AEC003000D153B /* ClearNebula.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ClearNebula.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2ED9F91D23AEC003000D153B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2ED9F92423AEC005000D153B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -40,6 +44,7 @@
 		2ED9F93123AEC048000D153B /* Nebula */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Nebula; sourceTree = "<group>"; };
 		2ED9F93223AEC796000D153B /* NebulaClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NebulaClient.swift; sourceTree = "<group>"; };
 		2EE1C8D423B0B6E7001B8759 /* NebulaController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NebulaController.swift; sourceTree = "<group>"; };
+		2EE1C8D623B1344A001B8759 /* VideoButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +52,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2E7D95CD23B2362D0093B2DA /* URLImage in Frameworks */,
 				2E0D9C4623AEC82800886F5B /* Nebula in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -104,6 +110,8 @@
 				2ED9F93223AEC796000D153B /* NebulaClient.swift */,
 				2EE1C8D423B0B6E7001B8759 /* NebulaController.swift */,
 				2E68776023AFF7DC0077C911 /* SpinnerView.swift */,
+				2EE1C8D623B1344A001B8759 /* VideoButton.swift */,
+				2E7D95C923B235C90093B2DA /* WebImageView.swift */,
 			);
 			path = ClearNebula;
 			sourceTree = "<group>";
@@ -127,6 +135,7 @@
 			name = ClearNebula;
 			packageProductDependencies = (
 				2E0D9C4523AEC82800886F5B /* Nebula */,
+				2E7D95CC23B2362D0093B2DA /* URLImage */,
 			);
 			productName = ClearNebula;
 			productReference = 2ED9F91A23AEC003000D153B /* ClearNebula.app */;
@@ -156,6 +165,9 @@
 				Base,
 			);
 			mainGroup = 2ED9F91123AEC003000D153B;
+			packageReferences = (
+				2E7D95CB23B2362D0093B2DA /* XCRemoteSwiftPackageReference "url-image" */,
+			);
 			productRefGroup = 2ED9F91B23AEC003000D153B /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -203,6 +215,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2E7D95CA23B235C90093B2DA /* WebImageView.swift in Sources */,
 				2E259A4623B01C4B002E80A1 /* FeaturedView.swift in Sources */,
 				2E0D9C5023AED0E300886F5B /* Storyboards.swift in Sources */,
 				2E68776123AFF7DC0077C911 /* SpinnerView.swift in Sources */,
@@ -214,6 +227,7 @@
 				2E259A4423B00E7F002E80A1 /* Keychain+AccessToken.swift in Sources */,
 				2EE1C8D523B0B6E7001B8759 /* NebulaController.swift in Sources */,
 				2E68775D23AFF3640077C911 /* Keychain.swift in Sources */,
+				2EE1C8D723B1344A001B8759 /* VideoButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -404,10 +418,26 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		2E7D95CB23B2362D0093B2DA /* XCRemoteSwiftPackageReference "url-image" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/dmytro-anokhin/url-image.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.9.9;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
 		2E0D9C4523AEC82800886F5B /* Nebula */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Nebula;
+		};
+		2E7D95CC23B2362D0093B2DA /* URLImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2E7D95CB23B2362D0093B2DA /* XCRemoteSwiftPackageReference "url-image" */;
+			productName = URLImage;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
