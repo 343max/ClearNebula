@@ -23,7 +23,6 @@
 		2ED9F92823AEC005000D153B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2ED9F92623AEC005000D153B /* LaunchScreen.storyboard */; };
 		2ED9F93323AEC796000D153B /* NebulaClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED9F93223AEC796000D153B /* NebulaClient.swift */; };
 		2EE1C8D523B0B6E7001B8759 /* NebulaController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE1C8D423B0B6E7001B8759 /* NebulaController.swift */; };
-		2EE1C8D723B1344A001B8759 /* VideoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE1C8D623B1344A001B8759 /* VideoButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,7 +43,6 @@
 		2ED9F93123AEC048000D153B /* Nebula */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Nebula; sourceTree = "<group>"; };
 		2ED9F93223AEC796000D153B /* NebulaClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NebulaClient.swift; sourceTree = "<group>"; };
 		2EE1C8D423B0B6E7001B8759 /* NebulaController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NebulaController.swift; sourceTree = "<group>"; };
-		2EE1C8D623B1344A001B8759 /* VideoButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,7 +108,6 @@
 				2ED9F93223AEC796000D153B /* NebulaClient.swift */,
 				2EE1C8D423B0B6E7001B8759 /* NebulaController.swift */,
 				2E68776023AFF7DC0077C911 /* SpinnerView.swift */,
-				2EE1C8D623B1344A001B8759 /* VideoButton.swift */,
 				2E7D95C923B235C90093B2DA /* WebImageView.swift */,
 			);
 			path = ClearNebula;
@@ -227,7 +224,6 @@
 				2E259A4423B00E7F002E80A1 /* Keychain+AccessToken.swift in Sources */,
 				2EE1C8D523B0B6E7001B8759 /* NebulaController.swift in Sources */,
 				2E68775D23AFF3640077C911 /* Keychain.swift in Sources */,
-				2EE1C8D723B1344A001B8759 /* VideoButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
