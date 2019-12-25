@@ -92,7 +92,7 @@ public struct Nebula {
         self.client = client
     }
     
-    static let jsonDecoder: JSONDecoder = {
+    public static let jsonDecoder: JSONDecoder = {
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .secondsSince1970
         decoder.keyDecodingStrategy = .convertFromSnakeCase

@@ -20,14 +20,18 @@ extension URL {
 
 extension Zype {
     public struct Collection: Decodable {
-        let id: String
-        let title: String
-        let headerImage: URL
+        public let id: String
+        public let siteId: String
+        public let title: String
+        public let headerImage: URL
+        public let order: UInt
         
         enum CodingKeys: String, CodingKey {
             case id = "_id"
+            case siteId
             case title
             case headerImage
+            case order
         }
     }
     
@@ -48,6 +52,11 @@ extension Zype {
         
         return client.send(URLRequest(url: url), type: Container<Collection>.self)
             .map { $0.response }
+            .map({ (collections) in
+                return collections.sorted { (a, b) -> Bool in
+                    a.order < b.order
+                }
+            })
             .eraseToAnyPublisher()
     }
 }
