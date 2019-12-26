@@ -3,23 +3,58 @@ import Nebula
 import SwiftUI
 
 struct ZypeReadyView<Content>: View where Content: View {
-    typealias ContentBuilder = (_ zype: Zype) -> Content
-    private let state: NebulaController.State
+    typealias ContentBuilder = () -> Content
+    private let ready: Bool
     private let content: ContentBuilder
     
-    init(state: NebulaController.State, @ViewBuilder content: @escaping ContentBuilder) {
-        self.state = state
+    init(ready: Bool, @ViewBuilder content: @escaping ContentBuilder) {
+        self.ready = ready
         self.content = content
     }
     
     var body: some View {
-        switch state {
-        case .gotTokens(_, let tokens):
-            return AnyView(content(Zype(client: NebulaClient(), tokens: tokens)))
-        default:
+        switch ready {
+        case true:
+            return AnyView(content())
+        case false:
             return AnyView(SpinnerView(style: .large))
         }
     }
+}
+
+extension Zype.Playlist: Identifiable { }
+
+struct FeaturedSectionView: View {
+    let section: Zype.FeaturedSection
+    
+    var body: some View {
+        VStack(alignment: .leading) {
+            Text(section.title)
+                .fontWeight(.semibold)
+                .padding(EdgeInsets(top: 0, leading: 40, bottom: -10, trailing: 40))
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack {
+                    ForEach(section.playlists) { (playlist) in
+                        VStack(alignment: .leading) {
+                            Button(action: {
+                                debugPrint(playlist.title)
+                            }) { () in
+                                WebImageView(url: playlist.thumbnails.last?.url ?? URL(string: "https://via.placeholder.com/1920x1080.png")!,
+                                             aspectRatio: 16 / 9,
+                                             height: 250)
+                            }.buttonStyle(PlainButtonStyle())
+                            Text(playlist.title)
+                        }
+                    }
+                }
+                .padding(EdgeInsets(top: 10, leading: 40, bottom: 20, trailing: 40))
+            }
+        }
+    }
+}
+
+extension Zype.FeaturedSection: Identifiable {
+    public var id: String { self.title }
 }
 
 struct FeaturedView: View {
@@ -30,8 +65,15 @@ struct FeaturedView: View {
     }
     
     var body: some View {
-        ZypeReadyView(state: viewModel.state) { (zype) in
-            Text("Ready!")
+        ZypeReadyView(ready: !viewModel.sections.isEmpty) {
+            ScrollView {
+                VStack(alignment: .leading, spacing: 30) {
+                    ForEach(self.viewModel.sections) { (section) in
+                        FeaturedSectionView(section: section)
+                    }
+                }
+            }
+            .padding(EdgeInsets(top: 0, leading: -90, bottom: 0, trailing: -90))
         }
     }
 }
@@ -63,6 +105,7 @@ extension FeaturedView {
                     zype.featuredSections()
                 }
                 .assertNoFailure()
+                .receive(on: RunLoop.main)
                 .assign(to: \.sections, on: self)
                 .cancelled(by: &cancellable)
         }

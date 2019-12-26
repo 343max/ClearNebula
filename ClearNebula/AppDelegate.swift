@@ -1,5 +1,6 @@
 import Combine
 import UIKit
+import URLImage
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -13,6 +14,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var cancellables: [Cancellable] = []
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        URLImageService.shared.setDefaultExpiryTime(3600 * 24 * 365 * 3)
+        
         let window = UIWindow(frame: UIScreen.main.bounds)
         
         navigationController = UINavigationController(rootViewController: UIViewController())
