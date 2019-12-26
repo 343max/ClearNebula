@@ -21,24 +21,18 @@ extension URL {
 extension Zype {
     public struct Collection: Decodable {
         public let id: String
-        public let siteId: String
         public let title: String
         public let headerImage: URL
         public let order: UInt
         
         enum CodingKeys: String, CodingKey {
             case id = "_id"
-            case siteId
             case title
             case headerImage
             case order
         }
     }
-    
-    private struct Container<Content>: Decodable where Content: Decodable {
-        let response: [Content]
-    }
-    
+        
     public func collections() -> JsonTaskPublisher<[Collection]> {
         // https://api.zype.com/zobjects?access_token=xxxx&active=true&page=1&per_page=500&zobject_type=collection
         

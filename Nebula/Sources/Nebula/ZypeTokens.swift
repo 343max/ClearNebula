@@ -8,6 +8,13 @@ extension Zype {
         let expiresAt: Date
         let refreshToken: String
         
+        public init(userId: String, accessToken: String, expiresAt: Date, refreshToken: String) {
+            self.userId = userId
+            self.accessToken = accessToken
+            self.expiresAt = expiresAt
+            self.refreshToken = refreshToken
+        }
+        
         internal init(user: Nebula.User) {
             self.userId = "\(user.pk)"
             self.accessToken = user.zypeAuthInfo.accessToken

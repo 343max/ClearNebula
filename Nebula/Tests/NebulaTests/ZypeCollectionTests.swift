@@ -27,7 +27,6 @@ final class ZypeCollectionTests: XCTestCase {
         let collection = try! Nebula.jsonDecoder.decode(Zype.Collection.self, from: data)
         
         XCTAssertEqual(collection.id, "5c8bfa1a2669cc146a001e86")
-        XCTAssertEqual(collection.siteId, "5c182d06649f0f134a001703")
         XCTAssertEqual(collection.title, "Women in STEM")
         XCTAssertEqual(collection.headerImage, URL(string: "https://upload.zype.com/assets/5ce2c63ee6ab7857edf31515/Women-in-STEM.jpg?1558538704"))
         XCTAssertEqual(collection.order, 1)

@@ -121,13 +121,12 @@ final class ZypePlaylistTests: XCTestCase {
         
         XCTAssertEqual(playlist.id, "5c2e931927156313af001293")
         XCTAssertEqual(playlist.title, "Up and Atom")
-        XCTAssertEqual(playlist.siteId, "5c182d06649f0f134a001703")
+        XCTAssertEqual(playlist.friendlyTitle, "upandatom")
         
         XCTAssertEqual(playlist.thumbnails.count, 4)
         
         let thumb = playlist.thumbnails.first!
         
-        XCTAssertEqual(thumb.aspectRatio, 1.78)
         XCTAssertEqual(thumb.height, 240)
         XCTAssertEqual(thumb.width, 426)
         XCTAssertEqual(thumb.url, URL(string: "https://image.zype.com/5c182d06649f0f134a001703/playlist/5c2e931927156313af001293/custom_thumbnail/240.jpg?1547578182"))

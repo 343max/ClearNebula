@@ -11,3 +11,9 @@ public struct Zype {
         self.tokens = tokens
     }
 }
+
+extension Zype {
+    internal struct Container<Content>: Decodable where Content: Decodable {
+        let response: [Content]
+    }
+}

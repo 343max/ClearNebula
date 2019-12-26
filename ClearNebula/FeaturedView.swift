@@ -42,6 +42,8 @@ extension FeaturedView {
         
         @Published var state = NebulaController.State.loggedOut
         
+        @Published var sections: [Zype.FeaturedSection] = []
+        
         var cancellable: [Cancellable] = []
         
         init(nebulaController: NebulaController) {
@@ -52,7 +54,18 @@ extension FeaturedView {
                 .receive(on: RunLoop.main)
                 .assign(to: \.state, on: self)
                 .cancelled(by: &cancellable)
-            }
+            
+            nebulaController
+                .$zype
+                .compactMap { $0 }
+                .setFailureType(to: Error.self)
+                .flatMap { (zype) in
+                    zype.featuredSections()
+                }
+                .assertNoFailure()
+                .assign(to: \.sections, on: self)
+                .cancelled(by: &cancellable)
+        }
     }
 }
 

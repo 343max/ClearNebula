@@ -13,9 +13,15 @@ final class NebulaController {
     
     private var cancellables: [Cancellable] = []
     
-    let nebula = Nebula(client: NebulaClient())
+    let client: NebulaClient
+    let nebula: Nebula
+    
+    @Published private(set) var zype: Zype? = nil
     
     init() {
+        self.client = NebulaClient()
+        self.nebula = Nebula(client: client)
+        
         if let accesToken = try! Keychain.getNebulaAccessToken() {
             state = .loggedIn(accessToken: accesToken)
         }
@@ -39,6 +45,22 @@ final class NebulaController {
                 State.gotTokens(accessToken: accessToken, zypeTokens: zypeTokens)
             }
             .assign(to: \.state, on: self)
+            .cancelled(by: &cancellables)
+        
+        $state
+            .compactMap({ (state) -> Zype.Tokens? in
+                if case .gotTokens(_, let zypeTokens) = state {
+                    return zypeTokens
+                } else {
+                    return nil
+                }
+            })
+            .compactMap { [weak self] (tokens) -> Zype? in
+                guard let self = self else { return nil }
+
+                return Zype(client: self.client, tokens: tokens)
+            }
+            .assign(to: \.zype, on: self)
             .cancelled(by: &cancellables)
     }
     
