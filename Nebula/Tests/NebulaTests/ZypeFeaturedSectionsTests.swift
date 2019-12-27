@@ -14,27 +14,21 @@ final class ZypeFeaturedSectionsTests: XCTestCase {
     
     func testFeaturedSections() {
         let client = MockClient { (request) -> (data: Data, response: HTTPURLResponse) in
-            let file: String = {
+            let fileURL: URL = {
                 let url = request.url!.absoluteString
                 if url.contains("channel") {
-                    return "channels.json"
+                    return URL(testResource: "channels.json")
                 } else if url.contains("featured") {
-                    return "featured.json"
+                    return URL(testResource: "featured.json")
                 } else if url.contains("collection") {
-                    return "collections.json"
+                    return URL(testResource: "collections.json")
                 } else {
                     XCTFail("invalid request: \(url)")
-                    return ""
+                    return URL(string: "")!
                 }
             }()
-            
-            let fileUrl = URL(fileURLWithPath: #file)
-                .deletingLastPathComponent()
-                .deletingLastPathComponent()
-                .appendingPathComponent("TestResources")
-                .appendingPathComponent(file)
 
-            let data = try! Data(contentsOf: fileUrl)
+            let data = try! Data(contentsOf: fileURL)
             
             return (data: data, response: HTTPURLResponse(url: request.url!,
                                                           statusCode: 200,
