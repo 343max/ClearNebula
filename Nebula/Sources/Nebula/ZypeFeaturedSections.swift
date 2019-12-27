@@ -3,18 +3,28 @@ import Foundation
 
 extension Zype {
     public struct FeaturedSection {
+        public let kind: Kind
         public let title: String
         public let channels: [Channel]
         
+        public enum Kind {
+            case featured
+            case featuredCreators
+            case hero
+        }
+        
         func appended(channels: [Channel]) -> FeaturedSection {
-            return FeaturedSection(title: self.title,
-                                   channels: self.channels + channels)
+            return FeaturedSection(
+                kind: self.kind,
+                title: self.title,
+                channels: self.channels + channels
+            )
         }
         
         static func hardcoded() -> [FeaturedSection] {
             return [
-                FeaturedSection(title: "Hero", channels: []),
-                FeaturedSection(title: "Featured Creators", channels: [])
+                FeaturedSection(kind: .hero, title: "Hero", channels: []),
+                FeaturedSection(kind: .featuredCreators, title: "Featured Creators", channels: [])
             ]
         }
     }
@@ -32,7 +42,7 @@ extension Zype {
                     .sorted { (a, b) -> Bool in
                         a.order < b.order
                     }
-                .map { FeaturedSection(title: $0.title, channels: []) }
+                .map { FeaturedSection(kind: .featured, title: $0.title, channels: []) }
                 
                 return featured
                     .sorted { $0.order < $1.order }

@@ -24,30 +24,101 @@ struct ZypeReadyView<Content>: View where Content: View {
 
 extension Zype.Channel: Identifiable { }
 
-struct FeaturedSectionView: View {
-    let section: Zype.FeaturedSection
+struct HeroButton: View {
+    var channel: Zype.Channel
+    
+    var body: some View {
+        Button(action: {
+            debugPrint(self.channel.title)
+        }) { () in
+            WebImageView(url: channel.mobileHero ?? channel.hero!,
+                         aspectRatio: 16 / 9,
+                         height: 350)
+        }.buttonStyle(PlainButtonStyle())
+    }
+}
+
+struct FeaturedButton: View {
+    var channel: Zype.Channel
     
     var body: some View {
         VStack(alignment: .leading) {
-            Text(section.title)
-                .fontWeight(.semibold)
-                .padding(EdgeInsets(top: 0, leading: 40, bottom: -10, trailing: 40))
+            Button(action: {
+                debugPrint(self.channel.title)
+            }) { () in
+                WebImageView(url: channel.featured!,
+                             aspectRatio: 16 / 9,
+                             height: 250)
+            }.buttonStyle(PlainButtonStyle())
+            Text(channel.title)
+        }
+    }
+}
+
+struct FeaturedCreatorButton: View {
+    var channel: Zype.Channel
+    
+    var body: some View {
+        VStack(alignment: .center) {
+            Button(action: {
+                debugPrint(self.channel.title)
+            }) { () in
+                WebImageView(url: channel.avatar,
+                             aspectRatio: 1,
+                             height: 150)
+                }.buttonStyle(PlainButtonStyle())
+            Text(channel.title)
+        }.frame(width: 200, alignment: .center)
+    }
+}
+
+struct FeaturedSectionView: View {
+    let section: Zype.FeaturedSection
+    
+    func button(channel: Zype.Channel) -> AnyView {
+        switch section.kind {
+        case .featured:
+            return AnyView(FeaturedButton(channel: channel))
+        case .hero:
+            return AnyView(HeroButton(channel: channel))
+        case .featuredCreators:
+            return AnyView(FeaturedCreatorButton(channel: channel))
+        }
+    }
+    
+    func edgeInsets() -> EdgeInsets {
+        switch section.kind {
+        case .featured:
+            return EdgeInsets(top: 10, leading: 40, bottom: 20, trailing: 40)
+        case .hero:
+            return EdgeInsets(top: 10, leading: 40, bottom: 50, trailing: 40)
+        case .featuredCreators:
+            return EdgeInsets(top: 20, leading: 40, bottom: 20, trailing: 40)
+        }
+    }
+    
+    func title() -> AnyView {
+        if section.kind == .hero {
+            return AnyView(EmptyView())
+        } else {
+            return AnyView(
+                Text(section.title)
+                    .fontWeight(.semibold)
+                    .padding(EdgeInsets(top: 0, leading: 40, bottom: -10, trailing: 40))
+            )
+        }
+    }
+    
+    var body: some View {
+        VStack(alignment: .leading) {
+            title()
             ScrollView(.horizontal, showsIndicators: false) {
-                HStack {
+                HStack(alignment: .top) {
                     ForEach(section.channels) { (channel) in
-                        VStack(alignment: .leading) {
-                            Button(action: {
-                                debugPrint(channel.title)
-                            }) { () in
-                                WebImageView(url: channel.mobileHero ?? channel.hero ?? channel.featured!,
-                                             aspectRatio: 16 / 9,
-                                             height: 250)
-                            }.buttonStyle(PlainButtonStyle())
-                            Text(channel.title)
-                        }
+                        self.button(channel: channel)
                     }
                 }
-                .padding(EdgeInsets(top: 10, leading: 40, bottom: 20, trailing: 40))
+                .padding(edgeInsets())
             }
         }
     }
