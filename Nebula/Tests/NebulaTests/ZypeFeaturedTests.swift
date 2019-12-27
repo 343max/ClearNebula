@@ -31,5 +31,6 @@ final class ZypeFeaturedTests: XCTestCase {
         XCTAssertEqual(featured.featureType, "Women in STEM")
         XCTAssertEqual(featured.title, "Up and Atom")
         XCTAssertEqual(featured.friendlyTitle, "up-and-atom")
+        XCTAssertEqual(featured.order, 13)
     }
 }

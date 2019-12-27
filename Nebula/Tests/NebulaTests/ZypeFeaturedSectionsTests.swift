@@ -47,7 +47,7 @@ final class ZypeFeaturedSectionsTests: XCTestCase {
                     XCTAssertEqual(womenInStem.title, "Women in STEM")
                     XCTAssertEqual(womenInStem.playlists.count, 5)
                     
-                    let upAndAtom = womenInStem.playlists[2]
+                    let upAndAtom = womenInStem.playlists[1]
                     XCTAssertEqual(upAndAtom.title, "Up and Atom")
                 }
         )

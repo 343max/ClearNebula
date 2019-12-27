@@ -6,12 +6,14 @@ extension Zype {
         public let featureType: String
         public let title: String
         public let friendlyTitle: String
+        public let order: Int
         
         enum CodingKeys: String, CodingKey {
             case id = "_id"
             case featureType
             case title
             case friendlyTitle
+            case order
         }
     }
     

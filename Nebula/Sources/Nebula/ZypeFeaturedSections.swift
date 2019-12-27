@@ -34,10 +34,12 @@ extension Zype {
                     }
                 .map { FeaturedSection(title: $0.title, playlists: []) }
                 
-                
-                return playlists.reduce(sections) { (sections, playlist) -> [FeaturedSection] in
+                return featured
+                    .sorted { $0.order < $1.order }
+                    .reduce(sections) { (sections, relation) -> [FeaturedSection] in
                     var sections = sections
-                    guard let relation = featured.first(where: { $0.title == playlist.title }) else {
+                    guard let playlist = playlists.first(where: { $0.title == relation.title }) else {
+                        debugPrint("couldn't find playlist for \(relation.title) (\(relation.friendlyTitle))")
                         return sections
                     }
                     
