@@ -24,6 +24,18 @@ struct ZypeReadyView<Content>: View where Content: View {
 
 extension Zype.Playlist: Identifiable { }
 
+extension Zype.Playlist {
+    func landscapeImage(height: Int) -> URL {
+        return [
+            thumbnail(height: 250)?.url,
+            image(title: "feature")?.url,
+            image(layout: "landscape")?.url
+        ]
+            .compactMap { $0 }
+            .first!
+    }
+}
+
 struct FeaturedSectionView: View {
     let section: Zype.FeaturedSection
     
@@ -39,9 +51,7 @@ struct FeaturedSectionView: View {
                             Button(action: {
                                 debugPrint(playlist.title)
                             }) { () in
-                                WebImageView(url: playlist.thumbnail(height: 250)?.url
-                                    ?? playlist.image(title: "feature")?.url
-                                    ?? URL(string: "https://via.placeholder.com/1920x1080.png")!,
+                                WebImageView(url: playlist.landscapeImage(height: 250),
                                              aspectRatio: 16 / 9,
                                              height: 250)
                             }.buttonStyle(PlainButtonStyle())

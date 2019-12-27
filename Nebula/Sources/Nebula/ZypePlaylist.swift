@@ -47,6 +47,11 @@ extension Zype {
         public func image(title: String) -> Image? {
             return images.first { $0.title == title }
         }
+        
+        public func image(layout: String) -> Image? {
+            return images.first { $0.layout == layout }
+        }
+        
     }
     
     public func playlists() -> JsonTaskPublisher<[Playlist]> {

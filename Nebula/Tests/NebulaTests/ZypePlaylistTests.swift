@@ -143,5 +143,6 @@ final class ZypePlaylistTests: XCTestCase {
         XCTAssertEqual(playlist.images[0].url, URL(string: "https://upload.zype.com/5c182d06649f0f134a001703/playlist_image/5c2e932c52c3c71261000373/1546556204/original.jpeg?1546556204")!)
         
         XCTAssertEqual(playlist.image(title: "avatar")!.id, "5c2e932c52c3c71261000373")
+        XCTAssertEqual(playlist.image(layout: "square")!.id, "5c2e932c52c3c71261000373")
     }
 }
