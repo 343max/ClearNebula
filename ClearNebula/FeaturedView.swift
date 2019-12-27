@@ -22,19 +22,7 @@ struct ZypeReadyView<Content>: View where Content: View {
     }
 }
 
-extension Zype.Playlist: Identifiable { }
-
-extension Zype.Playlist {
-    func landscapeImage(height: Int) -> URL {
-        return [
-            thumbnail(height: 250)?.url,
-            image(title: "feature")?.url,
-            image(layout: "landscape")?.url
-        ]
-            .compactMap { $0 }
-            .first!
-    }
-}
+extension Zype.Channel: Identifiable { }
 
 struct FeaturedSectionView: View {
     let section: Zype.FeaturedSection
@@ -46,16 +34,16 @@ struct FeaturedSectionView: View {
                 .padding(EdgeInsets(top: 0, leading: 40, bottom: -10, trailing: 40))
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack {
-                    ForEach(section.playlists) { (playlist) in
+                    ForEach(section.channels) { (channel) in
                         VStack(alignment: .leading) {
                             Button(action: {
-                                debugPrint(playlist.title)
+                                debugPrint(channel.title)
                             }) { () in
-                                WebImageView(url: playlist.landscapeImage(height: 250),
+                                WebImageView(url: channel.mobileHero ?? channel.hero ?? channel.featured!,
                                              aspectRatio: 16 / 9,
                                              height: 250)
                             }.buttonStyle(PlainButtonStyle())
-                            Text(playlist.title)
+                            Text(channel.title)
                         }
                     }
                 }
@@ -116,7 +104,9 @@ extension FeaturedView {
                 .flatMap { (zype) in
                     zype.featuredSections()
                 }
-                .assertNoFailure()
+                .catch({ (error) in
+                    return Empty<[Zype.FeaturedSection], Never>()
+                })
                 .receive(on: RunLoop.main)
                 .assign(to: \.sections, on: self)
                 .cancelled(by: &cancellable)

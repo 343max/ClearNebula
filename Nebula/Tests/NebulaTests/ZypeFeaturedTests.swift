@@ -28,6 +28,7 @@ final class ZypeFeaturedTests: XCTestCase {
         let featured = try! Nebula.jsonDecoder.decode(Zype.Featured.self, from: data)
         
         XCTAssertEqual(featured.id, "5c56462c5819f1113a001ed6")
+        XCTAssertEqual(featured.contentId, "5c4fcdb55d3c191158000953")
         XCTAssertEqual(featured.featureType, "Women in STEM")
         XCTAssertEqual(featured.title, "Up and Atom")
         XCTAssertEqual(featured.friendlyTitle, "up-and-atom")

@@ -4,47 +4,47 @@ import Foundation
 extension Zype {
     public struct FeaturedSection {
         public let title: String
-        public let playlists: [Playlist]
+        public let channels: [Channel]
         
-        func appended(playlists: [Playlist]) -> FeaturedSection {
+        func appended(channels: [Channel]) -> FeaturedSection {
             return FeaturedSection(title: self.title,
-                                   playlists: self.playlists + playlists)
+                                   channels: self.channels + channels)
         }
         
         static func hardcoded() -> [FeaturedSection] {
             return [
-                FeaturedSection(title: "Hero", playlists: []),
-                FeaturedSection(title: "Featured Creators", playlists: [])
+                FeaturedSection(title: "Hero", channels: []),
+                FeaturedSection(title: "Featured Creators", channels: [])
             ]
         }
     }
     
     public func featuredSections() -> JsonTaskPublisher<[FeaturedSection]> {
         return Publishers.CombineLatest3<
-            JsonTaskPublisher<[Zype.Playlist]>,
+            JsonTaskPublisher<[Zype.Channel]>,
             JsonTaskPublisher<[Zype.Featured]>,
             JsonTaskPublisher<[Zype.Collection]>
-            >(playlists(),
+            >(channels(),
               featured(),
               collections())
-            .map { (playlists, featured, collections) -> [FeaturedSection] in
+            .map { (channels, featured, collections) -> [FeaturedSection] in
                 let sections = FeaturedSection.hardcoded() + collections
                     .sorted { (a, b) -> Bool in
                         a.order < b.order
                     }
-                .map { FeaturedSection(title: $0.title, playlists: []) }
+                .map { FeaturedSection(title: $0.title, channels: []) }
                 
                 return featured
                     .sorted { $0.order < $1.order }
                     .reduce(sections) { (sections, relation) -> [FeaturedSection] in
                     var sections = sections
-                    guard let playlist = playlists.first(where: { $0.title == relation.title }) else {
-                        debugPrint("couldn't find playlist for \(relation.title) (\(relation.friendlyTitle))")
+                    guard let channel = channels.first(where: { $0.id == relation.contentId }) else {
+                        debugPrint("couldn't find playlist for \(relation.title) (\(relation.contentId))")
                         return sections
                     }
                     
                     if let index = sections.firstIndex(where: { $0.title == relation.featureType }) {
-                        sections[index] = sections[index].appended(playlists: [playlist])
+                        sections[index] = sections[index].appended(channels: [channel])
                     } else {
                         debugPrint("missing \(relation.featureType)")
                     }

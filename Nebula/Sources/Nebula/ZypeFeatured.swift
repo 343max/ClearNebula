@@ -3,6 +3,7 @@ import Foundation
 extension Zype {
     public struct Featured: Decodable {
         public let id: String
+        public let contentId: String
         public let featureType: String
         public let title: String
         public let friendlyTitle: String
@@ -10,6 +11,7 @@ extension Zype {
         
         enum CodingKeys: String, CodingKey {
             case id = "_id"
+            case contentId
             case featureType
             case title
             case friendlyTitle
