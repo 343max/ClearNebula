@@ -48,16 +48,10 @@ extension Zype {
                     .sorted { $0.order < $1.order }
                     .reduce(sections) { (sections, relation) -> [FeaturedSection] in
                     var sections = sections
-                    guard let channel = channels.first(where: { $0.id == relation.contentId }) else {
-                        debugPrint("couldn't find playlist for \(relation.title) (\(relation.contentId))")
-                        return sections
-                    }
+                    let channel = channels.first(where: { $0.id == relation.contentId })!
                     
-                    if let index = sections.firstIndex(where: { $0.title == relation.featureType }) {
-                        sections[index] = sections[index].appended(channels: [channel])
-                    } else {
-                        debugPrint("missing \(relation.featureType)")
-                    }
+                    let index = sections.firstIndex(where: { $0.title == relation.featureType })!
+                    sections[index] = sections[index].appended(channels: [channel])
                     
                     return sections
                 }
