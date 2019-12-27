@@ -14,20 +14,27 @@ final class ZypeFeaturedSectionsTests: XCTestCase {
     
     func testFeaturedSections() {
         let client = MockClient { (request) -> (data: Data, response: HTTPURLResponse) in
-            let url = request.url!.absoluteString
-            
-            let data: Data = {
-                if url.contains("playlists") {
-                    return MockClient.playlists
+            let file: String = {
+                let url = request.url!.absoluteString
+                if url.contains("channel") {
+                    return "channels.json"
                 } else if url.contains("featured") {
-                    return MockClient.featured
+                    return "featured.json"
                 } else if url.contains("collection") {
-                    return MockClient.collections
+                    return "collections.json"
                 } else {
                     XCTFail("invalid request: \(url)")
-                    return Data()
+                    return ""
                 }
             }()
+            
+            let fileUrl = URL(fileURLWithPath: #file)
+                .deletingLastPathComponent()
+                .deletingLastPathComponent()
+                .appendingPathComponent("TestResources")
+                .appendingPathComponent(file)
+
+            let data = try! Data(contentsOf: fileUrl)
             
             return (data: data, response: HTTPURLResponse(url: request.url!,
                                                           statusCode: 200,
@@ -39,15 +46,18 @@ final class ZypeFeaturedSectionsTests: XCTestCase {
         
         cancelables.append(
             zype.featuredSections()
-                .assertNoFailure()
+                .catch({ (error) -> Empty<[Zype.FeaturedSection], Never> in
+                    XCTFail(error.localizedDescription)
+                    return Empty<[Zype.FeaturedSection], Never>()
+                })
                 .sink { (sections) in
                     XCTAssertEqual(sections.count, 7)
                     
                     let womenInStem = sections[2]
                     XCTAssertEqual(womenInStem.title, "Women in STEM")
-                    XCTAssertEqual(womenInStem.playlists.count, 5)
+                    XCTAssertEqual(womenInStem.channels.count, 5)
                     
-                    let upAndAtom = womenInStem.playlists[1]
+                    let upAndAtom = womenInStem.channels[1]
                     XCTAssertEqual(upAndAtom.title, "Up and Atom")
                 }
         )
