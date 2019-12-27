@@ -39,7 +39,9 @@ struct FeaturedSectionView: View {
                             Button(action: {
                                 debugPrint(playlist.title)
                             }) { () in
-                                WebImageView(url: playlist.thumbnails.last?.url ?? URL(string: "https://via.placeholder.com/1920x1080.png")!,
+                                WebImageView(url: playlist.thumbnail(height: 250)?.url
+                                    ?? playlist.image(title: "feature")?.url
+                                    ?? URL(string: "https://via.placeholder.com/1920x1080.png")!,
                                              aspectRatio: 16 / 9,
                                              height: 250)
                             }.buttonStyle(PlainButtonStyle())

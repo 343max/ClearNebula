@@ -130,5 +130,18 @@ final class ZypePlaylistTests: XCTestCase {
         XCTAssertEqual(thumb.height, 240)
         XCTAssertEqual(thumb.width, 426)
         XCTAssertEqual(thumb.url, URL(string: "https://image.zype.com/5c182d06649f0f134a001703/playlist/5c2e931927156313af001293/custom_thumbnail/240.jpg?1547578182"))
+        
+        // make sure we always get a thumbnail that's slightly bigger then what we need
+        XCTAssertEqual(playlist.thumbnail(height: 600)!.height, 720)
+        // if no thumbnail is big enough return the biggets one
+        XCTAssertEqual(playlist.thumbnail(height: 2000)!.height, 1080)
+
+        XCTAssertEqual(playlist.images.count, 1)
+        XCTAssertEqual(playlist.images[0].id, "5c2e932c52c3c71261000373")
+        XCTAssertEqual(playlist.images[0].layout, "square")
+        XCTAssertEqual(playlist.images[0].title, "avatar")
+        XCTAssertEqual(playlist.images[0].url, URL(string: "https://upload.zype.com/5c182d06649f0f134a001703/playlist_image/5c2e932c52c3c71261000373/1546556204/original.jpeg?1546556204")!)
+        
+        XCTAssertEqual(playlist.image(title: "avatar")!.id, "5c2e932c52c3c71261000373")
     }
 }
