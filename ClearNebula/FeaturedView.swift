@@ -115,10 +115,13 @@ struct FeaturedView: View {
     let push: PushCallback
     @ObservedObject var viewModel: ViewModel
     
-    init(nebulaController: NebulaController, push: @escaping (AnyView) -> ()) {
+    init(nebulaController: NebulaController, navigator: AppNavigator) {
         self.viewModel = ViewModel(nebulaController: nebulaController)
         self.push = { (_ channel: Zype.Channel) in
-            push(AnyView(ChannelView(channel: channel, nebulaController: nebulaController)))
+            navigator.push(view: AnyView(ChannelView(channel: channel,
+                                                     nebulaController: nebulaController,
+                                                     navigator: navigator)),
+                           animated: true)
         }
     }
     
@@ -173,13 +176,7 @@ extension FeaturedView {
 }
 
 extension FeaturedView {
-    static func viewController(nebulaController: NebulaController, push: @escaping (AnyView) -> ()) -> UIHostingController<FeaturedView> {
-        return UIHostingController(rootView: FeaturedView(nebulaController: nebulaController, push: push))
-    }
-}
-
-struct FeaturedView_Previews: PreviewProvider {
-    static var previews: some View {
-        FeaturedView(nebulaController: NebulaController(), push: { (_) in })
+    static func viewController(nebulaController: NebulaController, navigator: AppNavigator) -> UIHostingController<FeaturedView> {
+        return UIHostingController(rootView: FeaturedView(nebulaController: nebulaController, navigator: navigator))
     }
 }

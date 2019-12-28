@@ -16,10 +16,20 @@ struct ChannelView: View {
     let channel: Zype.Channel
     
     @ObservedObject var viewModel: ViewModel
+    let navigator: AppNavigator
     
-    init(channel: Zype.Channel, nebulaController: NebulaController) {
+    init(channel: Zype.Channel, nebulaController: NebulaController, navigator: AppNavigator) {
         self.channel = channel
         self.viewModel = ViewModel(nebulaController: nebulaController)
+        self.navigator = navigator
+    }
+    
+    func play(playlistId: String) {
+        navigator.push(view: AnyView(VideoPlayerLoaderView(playlistId: playlistId,
+                                                           nebulaController: viewModel.nebulaController,
+                                                           navigator: navigator)),
+                       animated: true)
+
     }
     
     var body: some View {
@@ -43,7 +53,7 @@ struct ChannelView: View {
                             ForEach(self.viewModel.videos) { (video) in
                                 VStack(alignment: .leading) {
                                     Button(action: {
-                                        debugPrint("Ping!")
+                                        self.play(playlistId: video.id)
                                     }) {
                                         WebImageView(url: video.thumbnails.with(height: 500)!.url, aspectRatio: 16/9, width: nil, height: 500)
                                     }
