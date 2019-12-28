@@ -3,27 +3,6 @@ import XCTest
 @testable import Nebula
 
 final class NebulaNetworkClientTests: XCTestCase {
-    class MockClient: NebulaNetworkClient {
-        let data: Data
-        let response: HTTPURLResponse
-        
-        init(data: Data, response: HTTPURLResponse) {
-            self.data = data
-            self.response = response
-        }
-        
-        convenience init(string: String, statusCode: Int = 200) {
-            self.init(data: string.data(using: .utf8)!,
-                      response: HTTPURLResponse(url: URL(string: "https://example.com/")!, statusCode: statusCode, httpVersion: nil, headerFields: nil)!)
-        }
-        
-        func send(_ request: URLRequest) -> NebulaNetworkClientPublisher {
-            return Just<(data: Data, response: URLResponse)>((data: data, response: response))
-                .setFailureType(to: URLError.self)
-                .eraseToAnyPublisher()
-        }
-    }
-    
     private struct SampleResponse: Decodable {
         let greeting: String
     }

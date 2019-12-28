@@ -57,22 +57,4 @@ final class ZypeFeaturedSectionsTests: XCTestCase {
                 }
         )
     }
-    
-    
-    class MockClient: NebulaNetworkClient {
-        typealias ResponseGenerator = (_ request: URLRequest) -> (data: Data, response: HTTPURLResponse)
-        let callback: ResponseGenerator
-        
-        init(_ callback: @escaping ResponseGenerator) {
-            self.callback = callback
-        }
-        
-        func send(_ request: URLRequest) -> NebulaNetworkClientPublisher {
-            let (data, response) = callback(request)
-            
-            return Just<(data: Data, response: URLResponse)>((data: data, response: response))
-                .setFailureType(to: URLError.self)
-                .eraseToAnyPublisher()
-        }
-    }
 }
