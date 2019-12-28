@@ -48,6 +48,7 @@ final class ZypeChannelTests: XCTestCase {
         XCTAssertEqual(channel.title, "Wendover — The World's Most Useful Airport")
         
         XCTAssertEqual(channel.avatar, URL(string: "https://upload.zype.com/5c182d06649f0f134a001703/playlist_image/5ddd939f3fe8395deb5be191/1574802335/original.jpg?1574802335")!)
+        XCTAssertEqual(channel.banner, URL(string: "https://upload.zype.com/5c182d06649f0f134a001703/playlist_image/5ddd939f3fe8395deb5be192/1574802335/original.jpg?1574802335")!)
         XCTAssertEqual(channel.featured, URL(string: "https://upload.zype.com/5c182d06649f0f134a001703/playlist_image/5de38bade338f95ddb9d3ee3/1575193517/original.jpg?1575193517")!)
         XCTAssertEqual(channel.hero, URL(string: "https://upload.zype.com/5c182d06649f0f134a001703/playlist_image/5de38ac2e338f95df30cffe0/1575193282/original.jpg?1575193282")!)
         XCTAssertEqual(channel.mobileHero, URL(string: "https://upload.zype.com/5c182d06649f0f134a001703/playlist_image/5de38bade338f95ddb9d3ee3/1575193517/original.jpg?1575193517")!)

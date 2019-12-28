@@ -25,12 +25,11 @@ struct ZypeReadyView<Content>: View where Content: View {
 extension Zype.Channel: Identifiable { }
 
 struct HeroButton: View {
-    var channel: Zype.Channel
+    let action: () -> Void
+    let channel: Zype.Channel
     
     var body: some View {
-        Button(action: {
-            debugPrint(self.channel.title)
-        }) { () in
+        Button(action: action) { () in
             WebImageView(url: channel.mobileHero ?? channel.hero!,
                          aspectRatio: 16 / 9,
                          height: 350)
@@ -39,13 +38,12 @@ struct HeroButton: View {
 }
 
 struct FeaturedButton: View {
-    var channel: Zype.Channel
+    let action: () -> Void
+    let channel: Zype.Channel
     
     var body: some View {
         VStack(alignment: .leading) {
-            Button(action: {
-                debugPrint(self.channel.title)
-            }) { () in
+            Button(action: action) { () in
                 WebImageView(url: channel.featured!,
                              aspectRatio: 16 / 9,
                              height: 250)
@@ -56,13 +54,12 @@ struct FeaturedButton: View {
 }
 
 struct FeaturedCreatorButton: View {
-    var channel: Zype.Channel
+    let action: () -> Void
+    let channel: Zype.Channel
     
     var body: some View {
         VStack(alignment: .center) {
-            Button(action: {
-                debugPrint(self.channel.title)
-            }) { () in
+            Button(action: action) { () in
                 WebImageView(url: channel.avatar,
                              aspectRatio: 1,
                              height: 150)
@@ -73,16 +70,20 @@ struct FeaturedCreatorButton: View {
 }
 
 struct FeaturedSectionView: View {
+    let push: FeaturedView.PushCallback
     let section: Zype.FeaturedSection
     
     func button(channel: Zype.Channel) -> AnyView {
+        let action = {
+            self.push(channel)
+        }
         switch section.kind {
         case .featured:
-            return AnyView(FeaturedButton(channel: channel))
+            return AnyView(FeaturedButton(action: action, channel: channel))
         case .hero:
-            return AnyView(HeroButton(channel: channel))
+            return AnyView(HeroButton(action: action, channel: channel))
         case .featuredCreators:
-            return AnyView(FeaturedCreatorButton(channel: channel))
+            return AnyView(FeaturedCreatorButton(action: action, channel: channel))
         }
     }
     
@@ -129,10 +130,16 @@ extension Zype.FeaturedSection: Identifiable {
 }
 
 struct FeaturedView: View {
+    typealias PushCallback = (_ channel: Zype.Channel) -> ()
+    
+    let push: PushCallback
     @ObservedObject var viewModel: ViewModel
     
-    init(nebulaController: NebulaController) {
+    init(nebulaController: NebulaController, push: @escaping (AnyView) -> ()) {
         self.viewModel = ViewModel(nebulaController: nebulaController)
+        self.push = { (_ channel: Zype.Channel) in
+            push(AnyView(ChannelView(channel: channel, nebulaController: nebulaController)))
+        }
     }
     
     var body: some View {
@@ -140,7 +147,7 @@ struct FeaturedView: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 30) {
                     ForEach(self.viewModel.sections) { (section) in
-                        FeaturedSectionView(section: section)
+                        FeaturedSectionView(push: self.push, section: section)
                     }
                 }
             }
@@ -186,13 +193,13 @@ extension FeaturedView {
 }
 
 extension FeaturedView {
-    static func viewController(nebulaController: NebulaController) -> UIHostingController<FeaturedView> {
-        return UIHostingController(rootView: FeaturedView(nebulaController: nebulaController))
+    static func viewController(nebulaController: NebulaController, push: @escaping (AnyView) -> ()) -> UIHostingController<FeaturedView> {
+        return UIHostingController(rootView: FeaturedView(nebulaController: nebulaController, push: push))
     }
 }
 
 struct FeaturedView_Previews: PreviewProvider {
     static var previews: some View {
-        FeaturedView(nebulaController: NebulaController())
+        FeaturedView(nebulaController: NebulaController(), push: { (_) in })
     }
 }

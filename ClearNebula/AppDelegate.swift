@@ -1,4 +1,6 @@
 import Combine
+import Nebula
+import SwiftUI
 import UIKit
 import URLImage
 
@@ -12,7 +14,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let nebulaController = NebulaController()
     
     var cancellables: [Cancellable] = []
-
+    
+    func push(view: AnyView) {
+        let viewController = UIHostingController(rootView: view)
+        navigationController.pushViewController(viewController, animated: true)
+    }
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         URLImageService.shared.setDefaultExpiryTime(3600 * 24 * 365 * 3)
         
@@ -45,7 +52,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             })
             .sink { [weak self] (accessToken) in
                 guard let self = self else { return }
-                self.navigationController.viewControllers = [FeaturedView.viewController(nebulaController: self.nebulaController)]
+                self.navigationController.viewControllers = [
+                    FeaturedView.viewController(nebulaController: self.nebulaController, push: self.push(view:))
+                ]
                 self.loginViewController?.dismiss(animated: true, completion: nil)
             }
             .cancelled(by: &cancellables)

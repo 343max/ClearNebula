@@ -17,6 +17,7 @@
 		2E68776123AFF7DC0077C911 /* SpinnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E68776023AFF7DC0077C911 /* SpinnerView.swift */; };
 		2E7D95CA23B235C90093B2DA /* WebImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7D95C923B235C90093B2DA /* WebImageView.swift */; };
 		2E7D95CD23B2362D0093B2DA /* URLImage in Frameworks */ = {isa = PBXBuildFile; productRef = 2E7D95CC23B2362D0093B2DA /* URLImage */; };
+		2EAADD7923B6BFA100459493 /* ChannelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAADD7823B6BFA100459493 /* ChannelView.swift */; };
 		2ED9F91E23AEC003000D153B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED9F91D23AEC003000D153B /* AppDelegate.swift */; };
 		2ED9F92523AEC005000D153B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2ED9F92423AEC005000D153B /* Assets.xcassets */; };
 		2ED9F92823AEC005000D153B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2ED9F92623AEC005000D153B /* LaunchScreen.storyboard */; };
@@ -33,6 +34,7 @@
 		2E68775C23AFF3640077C911 /* Keychain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
 		2E68776023AFF7DC0077C911 /* SpinnerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpinnerView.swift; sourceTree = "<group>"; };
 		2E7D95C923B235C90093B2DA /* WebImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebImageView.swift; sourceTree = "<group>"; };
+		2EAADD7823B6BFA100459493 /* ChannelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelView.swift; sourceTree = "<group>"; };
 		2ED9F91A23AEC003000D153B /* ClearNebula.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ClearNebula.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2ED9F91D23AEC003000D153B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2ED9F92423AEC005000D153B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -98,6 +100,7 @@
 				2EE1C8D423B0B6E7001B8759 /* NebulaController.swift */,
 				2E68776023AFF7DC0077C911 /* SpinnerView.swift */,
 				2E7D95C923B235C90093B2DA /* WebImageView.swift */,
+				2EAADD7823B6BFA100459493 /* ChannelView.swift */,
 			);
 			path = ClearNebula;
 			sourceTree = "<group>";
@@ -179,6 +182,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2EAADD7923B6BFA100459493 /* ChannelView.swift in Sources */,
 				2E7D95CA23B235C90093B2DA /* WebImageView.swift in Sources */,
 				2E259A4623B01C4B002E80A1 /* FeaturedView.swift in Sources */,
 				2E68776123AFF7DC0077C911 /* SpinnerView.swift in Sources */,

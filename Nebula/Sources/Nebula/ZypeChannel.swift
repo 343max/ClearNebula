@@ -8,6 +8,7 @@ extension Zype {
         public let title: String
         
         public let avatar: URL
+        public let banner: URL
         public let featured: URL?
         public let hero: URL?
         public let mobileHero: URL?
@@ -18,6 +19,7 @@ extension Zype {
             case playlistId
             case title
             case avatar
+            case banner
             case featured
             case hero
             case mobileHero
