@@ -55,35 +55,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 guard let self = self else { return }
                 self.navigationController.viewControllers = [
                     FeaturedView.viewController(nebulaController: self.nebulaController, navigator: self)
-                    , UIHostingController(rootView: ChannelView(channel: try! Nebula.jsonDecoder.decode(Zype.Channel.self, from: """
-                        {
-                            "_id": "5c4fc3d05d3c191154000716",
-                            "active": true,
-                            "avatar": "https://upload.zype.com/5c182d06649f0f134a001703/playlist_image/5d25a846ea906d3ac69fabfd/1562748998/original.jpg?1562748998",
-                            "banner": "https://upload.zype.com/5c182d06649f0f134a001703/playlist_image/5d25a7686c8c99314bc42748/1562748776/original.jpg?1562748776",
-                            "bio": "Hi! I'm Vanessa Hill, a science educator turned filmmaker. BrainCraft is my channel about your brain, body and behaviour that aims to help you understand yourself and the world a little bit better 🧠✨",
-                            "created_at": "2019-01-28T22:09:04.459-05:00",
-                            "description": "",
-                            "facebook": null,
-                            "featured": "https://upload.zype.com/5c182d06649f0f134a001703/playlist_image/5d25a7ad6370354594df0a74/1562748845/original.jpg?1562748845",
-                            "friendly_title": "braincraft",
-                            "genre": "Science & Engineering",
-                            "instagram": "https://www.instagram.com/nessyhill/",
-                            "keywords": ["brain", "psychology", "science"],
-                            "merch": null,
-                            "mobile_hero": "https://upload.zype.com/5c182d06649f0f134a001703/playlist_image/5d25a7ad6370354594df0a74/1562748845/original.jpg?1562748845",
-                            "patreon": "https://www.patreon.com/BrainCraft",
-                            "playlist_id": "5c4a7181d6a6de1495004db4",
-                            "site_id": "5c182d06649f0f134a001703",
-                            "title": "BrainCraft",
-                            "twitter": "https://twitter.com/nessyhill",
-                            "updated_at": "2019-07-10T04:57:30.235-04:00",
-                            "video_ids": [],
-                            "website": null,
-                            "zobject_type_id": "5c4f495d67209a1101001437",
-                            "zobject_type_title": "channel"
-                        }
-                        """.data(using: .utf8)!), nebulaController: self.nebulaController, navigator: self))
                 ]
                 self.loginViewController?.dismiss(animated: true, completion: nil)
             }
