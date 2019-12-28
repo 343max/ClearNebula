@@ -25,7 +25,7 @@ struct ChannelView: View {
     var body: some View {
         ZStack {
             GeometryReader { (geometry) in
-                ScrollView(.vertical) {
+                List {
                     VStack(alignment: .center) {
                         URLImage(self.channel.banner,
                                  placeholder: { (_) in
@@ -39,22 +39,23 @@ struct ChannelView: View {
                                 .clipped()
                         }
                         
-                        ForEach(self.viewModel.videos) { (video) in
-                            VStack(alignment: .leading) {
-                                Button(action: {
-                                    debugPrint("Ping!")
-                                }) {
-                                    WebImageView(url: video.thumbnails.with(height: 500)!.url, aspectRatio: 16/9, width: nil, height: 500)
-                                }
-                                .buttonStyle(PlainButtonStyle())
-                                Text(video.title)
-                            }.padding()
-                        }
-                        
+                        ContentLoadingView(ready: !self.viewModel.videos.isEmpty) {
+                            ForEach(self.viewModel.videos) { (video) in
+                                VStack(alignment: .leading) {
+                                    Button(action: {
+                                        debugPrint("Ping!")
+                                    }) {
+                                        WebImageView(url: video.thumbnails.with(height: 500)!.url, aspectRatio: 16/9, width: nil, height: 500)
+                                    }
+                                    .buttonStyle(PlainButtonStyle())
+                                    Text(video.title)
+                                }.padding()
+                            }
+                        }.padding(EdgeInsets(top: 0, leading: 0, bottom: 200, trailing: 0))
                     }
                     .frame(maxWidth: .infinity, alignment: .top)
                 }
-                .padding(EdgeInsets(top: -45, leading: 0, bottom: 0, trailing: 0))
+                .padding(EdgeInsets(top: -50, leading: -30, bottom: 0, trailing: -30))
                 .onAppear(perform: {
                     self.viewModel.loadVideos(playlistId: self.channel.playlistId)
                 })

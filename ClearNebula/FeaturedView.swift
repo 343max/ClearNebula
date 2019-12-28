@@ -2,26 +2,6 @@ import Combine
 import Nebula
 import SwiftUI
 
-struct ZypeReadyView<Content>: View where Content: View {
-    typealias ContentBuilder = () -> Content
-    private let ready: Bool
-    private let content: ContentBuilder
-    
-    init(ready: Bool, @ViewBuilder content: @escaping ContentBuilder) {
-        self.ready = ready
-        self.content = content
-    }
-    
-    var body: some View {
-        switch ready {
-        case true:
-            return AnyView(content())
-        case false:
-            return AnyView(SpinnerView(style: .large))
-        }
-    }
-}
-
 extension Zype.Channel: Identifiable { }
 
 struct HeroButton: View {
@@ -143,7 +123,7 @@ struct FeaturedView: View {
     }
     
     var body: some View {
-        ZypeReadyView(ready: !viewModel.sections.isEmpty) {
+        ContentLoadingView(ready: !viewModel.sections.isEmpty) {
             ScrollView {
                 VStack(alignment: .leading, spacing: 30) {
                     ForEach(self.viewModel.sections) { (section) in
