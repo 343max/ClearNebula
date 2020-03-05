@@ -20,12 +20,12 @@ struct WebImageView: View {
                  placeholder: { (_) in
                     Color(.gray)
                     .aspectRatio(self.aspectRatio, contentMode: .fill)
-                    .frame(width: self.width, height: self.height, alignment: .center)
+                        .frame(maxWidth: .infinity)
         }) { (proxy) in
             proxy.image
             .resizable()
             .aspectRatio(self.aspectRatio, contentMode: .fill)
-            .frame(width: self.width, height: self.height, alignment: .center)
+                .frame(maxWidth: .infinity)
         }
     }
 }

@@ -17,9 +17,11 @@
 		2E68776123AFF7DC0077C911 /* SpinnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E68776023AFF7DC0077C911 /* SpinnerView.swift */; };
 		2E7D95CA23B235C90093B2DA /* WebImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7D95C923B235C90093B2DA /* WebImageView.swift */; };
 		2E7D95CD23B2362D0093B2DA /* URLImage in Frameworks */ = {isa = PBXBuildFile; productRef = 2E7D95CC23B2362D0093B2DA /* URLImage */; };
+		2E8397BD23BA2C500074E824 /* Grid in Frameworks */ = {isa = PBXBuildFile; productRef = 2E8397BC23BA2C500074E824 /* Grid */; };
 		2EAADD7923B6BFA100459493 /* ChannelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAADD7823B6BFA100459493 /* ChannelView.swift */; };
 		2EAADD7B23B7BF6900459493 /* ContentLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAADD7A23B7BF6900459493 /* ContentLoadingView.swift */; };
 		2EAADD7D23B7CCDD00459493 /* VideoPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAADD7C23B7CCDD00459493 /* VideoPlayerView.swift */; };
+		2EAADD7F23B7F41500459493 /* VideoGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAADD7E23B7F41500459493 /* VideoGrid.swift */; };
 		2ED9F91E23AEC003000D153B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED9F91D23AEC003000D153B /* AppDelegate.swift */; };
 		2ED9F92523AEC005000D153B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2ED9F92423AEC005000D153B /* Assets.xcassets */; };
 		2ED9F92823AEC005000D153B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2ED9F92623AEC005000D153B /* LaunchScreen.storyboard */; };
@@ -39,6 +41,7 @@
 		2EAADD7823B6BFA100459493 /* ChannelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelView.swift; sourceTree = "<group>"; };
 		2EAADD7A23B7BF6900459493 /* ContentLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentLoadingView.swift; sourceTree = "<group>"; };
 		2EAADD7C23B7CCDD00459493 /* VideoPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerView.swift; sourceTree = "<group>"; };
+		2EAADD7E23B7F41500459493 /* VideoGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoGrid.swift; sourceTree = "<group>"; };
 		2ED9F91A23AEC003000D153B /* ClearNebula.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ClearNebula.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2ED9F91D23AEC003000D153B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2ED9F92423AEC005000D153B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -55,6 +58,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2E7D95CD23B2362D0093B2DA /* URLImage in Frameworks */,
+				2E8397BD23BA2C500074E824 /* Grid in Frameworks */,
 				2E0D9C4623AEC82800886F5B /* Nebula in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -105,8 +109,9 @@
 				2ED9F93223AEC796000D153B /* NebulaClient.swift */,
 				2EE1C8D423B0B6E7001B8759 /* NebulaController.swift */,
 				2E68776023AFF7DC0077C911 /* SpinnerView.swift */,
-				2E7D95C923B235C90093B2DA /* WebImageView.swift */,
+				2EAADD7E23B7F41500459493 /* VideoGrid.swift */,
 				2EAADD7C23B7CCDD00459493 /* VideoPlayerView.swift */,
+				2E7D95C923B235C90093B2DA /* WebImageView.swift */,
 			);
 			path = ClearNebula;
 			sourceTree = "<group>";
@@ -130,6 +135,7 @@
 			packageProductDependencies = (
 				2E0D9C4523AEC82800886F5B /* Nebula */,
 				2E7D95CC23B2362D0093B2DA /* URLImage */,
+				2E8397BC23BA2C500074E824 /* Grid */,
 			);
 			productName = ClearNebula;
 			productReference = 2ED9F91A23AEC003000D153B /* ClearNebula.app */;
@@ -161,6 +167,7 @@
 			mainGroup = 2ED9F91123AEC003000D153B;
 			packageReferences = (
 				2E7D95CB23B2362D0093B2DA /* XCRemoteSwiftPackageReference "url-image" */,
+				2E8397BB23BA2BBD0074E824 /* XCRemoteSwiftPackageReference "swiftui-extensions" */,
 			);
 			productRefGroup = 2ED9F91B23AEC003000D153B /* Products */;
 			projectDirPath = "";
@@ -196,6 +203,7 @@
 				2E0D9C4823AEC8BD00886F5B /* Cancellable+Helper.swift in Sources */,
 				2ED9F93323AEC796000D153B /* NebulaClient.swift in Sources */,
 				2ED9F91E23AEC003000D153B /* AppDelegate.swift in Sources */,
+				2EAADD7F23B7F41500459493 /* VideoGrid.swift in Sources */,
 				2E259A4223AFF968002E80A1 /* HiddenModifier.swift in Sources */,
 				2EAADD7B23B7BF6900459493 /* ContentLoadingView.swift in Sources */,
 				2E259A4423B00E7F002E80A1 /* Keychain+AccessToken.swift in Sources */,
@@ -401,6 +409,14 @@
 				minimumVersion = 0.9.9;
 			};
 		};
+		2E8397BB23BA2BBD0074E824 /* XCRemoteSwiftPackageReference "swiftui-extensions" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:swift-extensions/swiftui-extensions.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.9.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -412,6 +428,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 2E7D95CB23B2362D0093B2DA /* XCRemoteSwiftPackageReference "url-image" */;
 			productName = URLImage;
+		};
+		2E8397BC23BA2C500074E824 /* Grid */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2E8397BB23BA2BBD0074E824 /* XCRemoteSwiftPackageReference "swiftui-extensions" */;
+			productName = Grid;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -53,9 +53,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             })
             .sink { [weak self] (accessToken) in
                 guard let self = self else { return }
+                
                 self.navigationController.viewControllers = [
                     FeaturedView.viewController(nebulaController: self.nebulaController, navigator: self)
                 ]
+                
+                if (true) {
+                    let channel = Zype.Channel(
+                        id: "5c4fc3d05d3c191154000716",
+                        friendlyTitle: "braincraft",
+                        playlistId: "5c4a7181d6a6de1495004db4",
+                        title: "BrainCraft",
+                        avatar: URL(string: "https://upload.zype.com/5c182d06649f0f134a001703/playlist_image/5d25a846ea906d3ac69fabfd/1562748998/original.jpg?1562748998")!,
+                        banner: URL(string: "https://upload.zype.com/5c182d06649f0f134a001703/playlist_image/5d25a7686c8c99314bc42748/1562748776/original.jpg?1562748776")!,
+                        featured: URL(string: "https://upload.zype.com/5c182d06649f0f134a001703/playlist_image/5d25a7ad6370354594df0a74/1562748845/original.jpg?1562748845")!,
+                        hero: nil,
+                        mobileHero: URL(string: "https://upload.zype.com/5c182d06649f0f134a001703/playlist_image/5d25a7ad6370354594df0a74/1562748845/original.jpg?1562748845")!
+                    )
+                    self.push(view: AnyView(ChannelView(channel: channel,
+                                                        nebulaController: self.nebulaController,
+                                                        navigator: self)),
+                              animated: false)
+                }
+                
                 self.loginViewController?.dismiss(animated: true, completion: nil)
             }
             .cancelled(by: &cancellables)

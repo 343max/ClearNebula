@@ -24,6 +24,26 @@ extension Zype {
             case hero
             case mobileHero
         }
+        
+        public init(id: String,
+                    friendlyTitle: String,
+                    playlistId: String,
+                    title: String,
+                    avatar: URL,
+                    banner: URL,
+                    featured: URL?,
+                    hero: URL?,
+                    mobileHero: URL?) {
+            self.id = id
+            self.friendlyTitle = friendlyTitle
+            self.playlistId = playlistId
+            self.title = title
+            self.avatar = avatar
+            self.banner = banner
+            self.featured = featured
+            self.hero = hero
+            self.mobileHero = mobileHero
+        }
     }
     
     public func channels() -> JsonTaskPublisher<[Channel]> {

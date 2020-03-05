@@ -2,6 +2,15 @@
   "object": {
     "pins": [
       {
+        "package": "swiftui-extensions",
+        "repositoryURL": "git@github.com:swift-extensions/swiftui-extensions.git",
+        "state": {
+          "branch": null,
+          "revision": "40bf1eae6f1d95cc799b7f70467abc36fe8265f3",
+          "version": "0.9.0"
+        }
+      },
+      {
         "package": "URLImage",
         "repositoryURL": "https://github.com/dmytro-anokhin/url-image.git",
         "state": {
